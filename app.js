@@ -242,7 +242,7 @@ function initProposalBuilder() {
 
       const opt = {
         margin:       [0.2, 0.2, 0.2, 0.2],
-        filename:     `Orçamento_Prepara_Instrutor_${clientName.replace(/\s+/g, '_')}.pdf`,
+        filename:     `Orçamento_Acelera_Instrutor_${clientName.replace(/\s+/g, '_')}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2, useCORS: true, logging: false },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -290,10 +290,10 @@ function initPackageModals() {
 
   const packagesData = {
     burocracia: {
-      category: 'Assessoria Burocrática',
-      title: 'Burocracia Detran',
+      category: 'Fase 1: Licenciamento',
+      title: 'Fase 1: Estruturação e Licenciamento',
       iconClass: 'fa-solid fa-file-signature',
-      description: 'Estruturação burocrática e documental completa para instrutores autônomos. Redação técnica de ofícios, emissão de certidões e declarações para manter seu credenciamento 100% regular sem perder tempo fora do volante.',
+      description: 'Sua licença autônoma operando rápido e dentro da lei. Tiramos toda a burocracia do Detran do seu caminho e cuidamos das documentações para que você foque apenas no volante.',
       deliverables: [
         'Redação e protocolo técnico de Ofícios para o Detran',
         'Emissão e acompanhamento de Certidões Obrigatórias',
@@ -301,13 +301,13 @@ function initPackageModals() {
         'Kit Digital em PDF com modelos de recibos e agenda'
       ],
       audience: 'Instrutores autônomos que desejam eliminar a burocracia do Detran com total segurança jurídica.',
-      whatsappMsg: 'Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20*Pacote%20Burocracia%20Detran*.'
+      whatsappMsg: 'Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20*Fase%201%3A%20Estrutura%C3%A7%C3%A3o%20e%20Licenciamento*.'
     },
     digital: {
-      category: 'Social Media & Captação',
-      title: 'Presença Digital & Anúncios',
+      category: 'Fase 2: Captação',
+      title: 'Fase 2: Máquina de Captação',
       iconClass: 'fa-solid fa-bullhorn',
-      description: 'Posicionamento digital profissional para atrair alunos qualificados. Transformamos seu Instagram em uma vitrine persuasiva com vídeos em IA e anúncios geolocalizados direcionados à sua cidade.',
+      description: 'Alunos da sua região pedindo orçamento todos os dias no seu WhatsApp. Blindamos o seu posicionamento digital e ativamos campanhas estratégicas para que você nunca mais sofra com a agenda vazia.',
       deliverables: [
         'Reforma completa do perfil no Instagram (Bio, Foto e WhatsApp)',
         'Vídeo de Captação Profissional produzido com Inteligência Artificial',
@@ -315,13 +315,13 @@ function initPackageModals() {
         'Ativação e setup de Tráfego Pago Geolocalizado (Meta Ads)'
       ],
       audience: 'Instrutores que precisam preencher lacunas na agenda com fluxo constante de alunos pelo Instagram.',
-      whatsappMsg: 'Ol%C3%A1!%20Quero%20conhecer%20o%20*Pacote%20Presen%C3%A7a%20Digital%20%26%20An%C3%BAncios*.'
+      whatsappMsg: 'Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20*Fase%202%3A%20M%C3%A1quina%20de%20Capta%C3%A7%C3%A3o*.'
     },
     vendas: {
-      category: 'Capacitação Comercial',
-      title: 'Vendas & WhatsApp Express',
+      category: 'Fase 3: Conversão',
+      title: 'Fase 3: Alta Conversão',
       iconClass: 'fa-solid fa-chart-line',
-      description: 'Mentoria prática focada em conversão. Aprenda como atender interessados no WhatsApp, apresentar o valor real das suas aulas práticas e fechar matrículas rapidamente sem entrar em guerra de preços.',
+      description: 'O passo a passo prático para fechar matrículas de alto valor. Aprenda a conduzir o atendimento no WhatsApp e fechar pacotes inteiros de aulas sem precisar baratear o seu serviço ou dar descontos desnecessários.',
       deliverables: [
         'Mentoria Individual Express (30 a 45 min) online ou presencial',
         'Scripts prontos de atendimento e contorno de objeções de preço',
@@ -329,13 +329,13 @@ function initPackageModals() {
         'Guia prático de acompanhamento e fechamento de novos alunos'
       ],
       audience: 'Instrutores que recebem contatos no WhatsApp mas perdem orçamentos por falta de técnica de vendas.',
-      whatsappMsg: 'Ol%C3%A1!%20Gostaria%20de%20detalhes%20sobre%20o%20*Pacote%20Vendas%20%26%20WhatsApp%20Express*.'
+      whatsappMsg: 'Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20*Fase%203%3A%20Alta%20Convers%C3%A3o*.'
     },
     elite: {
       category: 'Solução VIP 360°',
-      title: 'Combo Instrutor Elite',
+      title: 'Pacote Premium: Aceleração 360°',
       iconClass: 'fa-solid fa-crown',
-      description: 'A solução definitiva de aceleração. Reúne em um único combo a gestão burocrática do Detran, reformulação do Instagram, vídeo IA, anúncios patrocinados, kit de impressos e mentoria individual de vendas.',
+      description: 'O ecossistema completo rodando para você. A união perfeita entre a aprovação rápida no Detran, captação automática de alunos e técnicas avançadas de vendas para transformar você no instrutor mais requisitado da sua cidade.',
       deliverables: [
         'Assessoria Burocrática Detran Completa + Protocolo de Ofícios',
         'Presença Digital 360° (Instagram, Vídeos IA e Meta Ads Local)',
@@ -343,7 +343,7 @@ function initPackageModals() {
         'Mentoria Exclusiva de Vendas e Fechamento no WhatsApp'
       ],
       audience: 'Instrutores que buscam transformação total, delegando burocracia e marketing para focar no volante.',
-      whatsappMsg: 'Ol%C3%A1!%20Tenho%20interesse%20no%20*Combo%20Instrutor%20Elite%20360%C2%B0*!'
+      whatsappMsg: 'Ol%C3%A1!%20Tenho%20interesse%20no%20*Pacote%20Premium%20360%C2%B0*!'
     }
   };
 
