@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prepara Instrutor | Inteligência de Dados e Negócios para Instrutores Autônomos</title>
+  <meta name="description" content="Central estratégica B2B para instrutores de trânsito autônomos. Transformamos burocracia em produtividade e agenda vazia em faturamento real com serviços modulares sob demanda.">
+  
+  <!-- Favicon / Ícone de Aba -->
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="apple-touch-icon" href="assets/logo.jpg">
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- html2pdf.js Library for PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Site Header & Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo-container" aria-label="Prepara Instrutor Home">
+        <img src="assets/logo.jpg" alt="Logo Prepara Instrutor" class="brand-logo-img">
+      </a>
+
+      <nav aria-label="Navegação Principal">
+        <ul class="nav-menu">
+          <li><a href="#servicos" class="nav-link">Pacotes Estratégicos</a></li>
+          <li><a href="#roi" class="nav-link">Análise de ROI</a></li>
+          <li><a href="#ciclo" class="nav-link">Ciclo de Crescimento</a></li>
+          <li><a href="#calculadora" class="nav-link">Simulador ROI</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="btn-theme-toggle" aria-label="Alternar Tema Claro/Escuro" title="Alternar Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="https://wa.me/5596981461881?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20do%20Prepara%20Instrutor." target="_blank" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp" style="font-size: 1.1rem;"></i>
+          <span>Falar no WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge-brand">
+          <i class="fa-solid fa-briefcase"></i>
+          <span>Central Estratégica (B2B) para Instrutores Autônomos</span>
+        </div>
+        
+        <h1 class="hero-title">
+          Do Credenciamento à <span class="text-gradient-gold">AGENDA CHEIA</span>. Pare de Perder Tempo com Burocracia.
+        </h1>
+        
+        <p class="hero-subtitle">
+          Transformamos a burocracia em produtividade e a agenda vazia em faturamento real através de <strong>soluções modulares sob demanda</strong>. Sem mensalidades fixas — você paga apenas pelo que precisa.
+        </p>
+
+        <div class="hero-roi-badge">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Apenas 1 novo aluno convertido já paga todo o seu investimento!</span>
+        </div>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#servicos" class="btn-primary">
+            <i class="fa-solid fa-cubes"></i>
+            <span>Ver Pacotes Estratégicos</span>
+          </a>
+          <a href="https://wa.me/5596981461881?text=Ol%C3%A1!%20Quero%20acelerar%20meu%20neg%C3%B3cio%20com%20o%20Prepara%20Instrutor." target="_blank" class="btn-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>Falar no WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Visual Card (B2B Dashboard) -->
+      <div class="hero-visual-container">
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+            <div>
+              <h4 style="font-size: 1.1rem; color: var(--navy-dark);">Indicadores de Impacto & ROI</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Métricas médias de parceiros</p>
+            </div>
+            <span class="badge-brand badge-green"><i class="fa-solid fa-check-double"></i> Retorno Rápido</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Ticket Médio:</span>
+              <h3 style="font-size: 1.8rem; color: var(--blue-brand); font-weight: 800; margin-top: 0.25rem;">R$ 86,00</h3>
+              <p style="font-size: 0.75rem; color: var(--text-muted);">Investimento modular médio</p>
+            </div>
+
+            <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Tempo Recuperado:</span>
+              <h3 style="font-size: 1.8rem; color: var(--green-brand); font-weight: 800; margin-top: 0.25rem;">12h / mês</h3>
+              <p style="font-size: 0.75rem; color: var(--text-muted);">Liberadas para aulas práticas</p>
+            </div>
+          </div>
+
+          <div style="background: var(--yellow-light); border: 1px solid rgba(244,169,0,0.4); padding: 1rem; border-radius: var(--radius-md); font-size: 0.85rem; color: #8A6000;">
+            <i class="fa-solid fa-bullseye" style="color: var(--yellow-brand); font-size: 1.1rem; margin-right: 0.35rem;"></i>
+            <strong>Ponto de Equilíbrio:</strong> Apenas 1 novo aluno convertido paga todo o investimento em captação.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfólio de Pacotes e Soluções Estratégicas -->
+  <section id="servicos" class="services-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-brand badge-blue"><i class="fa-solid fa-cubes"></i> Soluções Modulares e Combos</span>
+        <h2 class="section-title">Pacotes de <span class="text-gradient-blue">Aceleração de Negócios</span></h2>
+        <p class="section-desc">Combos estratégicos sem mensalidades fixas. Escolha o pacote ideal para o momento atual do seu negócio e expanda seus resultados.</p>
+      </div>
+
+      <!-- Category Filters -->
+      <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3rem;">
+        <button class="btn-secondary service-filter active" data-filter="all" style="border-radius: var(--radius-full);">Todos os Pacotes</button>
+        <button class="btn-secondary service-filter" data-filter="assessoria" style="border-radius: var(--radius-full);">Assessoria Burocrática</button>
+        <button class="btn-secondary service-filter" data-filter="marketing" style="border-radius: var(--radius-full);">Social Media & Captação</button>
+        <button class="btn-secondary service-filter" data-filter="capacitacao" style="border-radius: var(--radius-full);">Capacitação</button>
+        <button class="btn-secondary service-filter" data-filter="combo" style="border-radius: var(--radius-full);">Combos 360°</button>
+      </div>
+
+      <!-- Packages Grid (Objetivo & Fluido) -->
+      <div class="services-grid">
+        <!-- Package 1 -->
+        <div class="service-card package-card" data-category="assessoria">
+          <div class="package-header-top">
+            <div class="package-icon-badge icon-blue">
+              <i class="fa-solid fa-file-signature"></i>
+            </div>
+            <span class="package-tag-badge badge-blue"><i class="fa-solid fa-shield-halved"></i> Detran OK</span>
+          </div>
+          
+          <h3 class="package-card-title">Burocracia Detran</h3>
+          <p class="package-card-desc">Emissão de ofícios, certidões e documentos técnicos exigidos pelo Detran sem perda de tempo.</p>
+          
+          <div class="package-quick-tags">
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Ofícios Técnicos</span>
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Certidões</span>
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Modelos PDF</span>
+          </div>
+
+          <div class="package-action-row">
+            <button class="btn-primary package-detail-btn" data-package="burocracia" style="width: 100%;">
+              <i class="fa-solid fa-arrow-right"></i>
+              <span>Ver Detalhes</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Package 2 -->
+        <div class="service-card package-card package-card-featured" data-category="marketing">
+          <div class="package-header-top">
+            <div class="package-icon-badge icon-gold">
+              <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            <span class="package-tag-badge badge-gold"><i class="fa-solid fa-fire"></i> Mais Popular</span>
+          </div>
+          
+          <h3 class="package-card-title">Presença Digital & Anúncios</h3>
+          <p class="package-card-desc">Instagram profissional, vídeos em IA e anúncios patrocinados (Meta Ads) na sua cidade.</p>
+          
+          <div class="package-quick-tags">
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Perfil Instagram & IA</span>
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Anúncios Meta Ads</span>
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Artes Feed</span>
+          </div>
+
+          <div class="package-action-row">
+            <button class="btn-primary package-detail-btn" data-package="digital" style="width: 100%;">
+              <i class="fa-solid fa-arrow-right"></i>
+              <span>Ver Detalhes</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Package 3 -->
+        <div class="service-card package-card" data-category="capacitacao">
+          <div class="package-header-top">
+            <div class="package-icon-badge icon-green">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <span class="package-tag-badge badge-green"><i class="fa-solid fa-bolt"></i> Alta Conversão</span>
+          </div>
+          
+          <h3 class="package-card-title">Vendas & WhatsApp Express</h3>
+          <p class="package-card-desc">Mentoria prática para atender candidatos no WhatsApp e fechar matrículas sem dar descontos.</p>
+          
+          <div class="package-quick-tags">
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Mentoria Express</span>
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Scripts WhatsApp</span>
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Fechamento</span>
+          </div>
+
+          <div class="package-action-row">
+            <button class="btn-primary package-detail-btn" data-package="vendas" style="width: 100%;">
+              <i class="fa-solid fa-arrow-right"></i>
+              <span>Ver Detalhes</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Package 4 -->
+        <div class="service-card package-card package-card-vip" data-category="combo">
+          <div class="package-header-top">
+            <div class="package-icon-badge icon-purple">
+              <i class="fa-solid fa-crown"></i>
+            </div>
+            <span class="package-tag-badge badge-purple"><i class="fa-solid fa-sparkles"></i> Combo VIP 360°</span>
+          </div>
+          
+          <h3 class="package-card-title">Combo Instrutor Elite</h3>
+          <p class="package-card-desc">Solução completa: unifica Burocracia Detran, Perfil Instagram, Anúncios e Mentoria Comercial.</p>
+          
+          <div class="package-quick-tags">
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Burocracia Detran</span>
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Instagram & Ads</span>
+            <span class="quick-tag"><i class="fa-solid fa-check"></i> Mentoria Comercial</span>
+          </div>
+
+          <div class="package-action-row">
+            <button class="btn-primary package-detail-btn" data-package="elite" style="width: 100%; background: linear-gradient(135deg, #FFB703 0%, #F4A900 100%); color: #0B1E36;">
+              <i class="fa-solid fa-gem"></i>
+              <span>Quero Conhecer</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+
+
+
+  <!-- O Ciclo de Crescimento (4 Pilares) -->
+  <section id="ciclo" class="services-section" style="background: var(--bg-surface);">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-brand">Nossa Metodologia</span>
+        <h2 class="section-title">O Ciclo de <span class="text-gradient-gold">Crescimento do Instrutor</span></h2>
+        <p class="section-desc">Dividido em quatro pilares fundamentais para garantir a sustentabilidade e escala do seu negócio no mercado.</p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-num">01</div>
+          <h3>Captação</h3>
+          <p>Utilização de anúncios patrocinados geolocalizados para atrair interessados na sua região de atuação.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-num">02</div>
+          <h3>Conversão</h3>
+          <p>Posicionamento digital profissional que transmite autoridade e gera confiança imediata no aluno.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-num">03</div>
+          <h3>Fechamento</h3>
+          <p>Treinamento focado em técnicas de vendas no WhatsApp para não perder orçamentos para grandes autoescolas.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-num">04</div>
+          <h3>Operação</h3>
+          <p>Delegação total da burocracia técnica do Detran para que você tenha foco exclusivo na instrução e no volante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulador de ROI Interativo -->
+  <section id="calculadora" class="services-section" style="background: var(--bg-primary);">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-brand badge-green"><i class="fa-solid fa-calculator"></i> Análise de ROI</span>
+        <h2 class="section-title">Simulador de <span class="text-gradient-green">Retorno sobre Investimento</span></h2>
+        <p class="section-desc">Ao delegar marketing e burocracia, você libera horas para aulas práticas rentáveis.</p>
+      </div>
+
+      <div class="calculator-box">
+        <div>
+          <h3 style="font-size: 1.4rem; margin-bottom: 1rem; color: #FFFFFF;">Simule a economia e faturamento:</h3>
+          
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">Horas Burocráticas Gastas por Mês:</label>
+            <input type="range" id="roiHours" class="range-input" min="4" max="30" step="2" value="12">
+            <span id="roiHoursVal" style="font-weight: 800; color: var(--yellow-brand); font-size: 1.1rem; display: block; margin-top: 0.35rem;">12 horas mensais</span>
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">Seu Valor Médio por Aula Prática:</label>
+            <input type="range" id="roiClassRate" class="range-input" min="50" max="150" step="5" value="80">
+            <span id="roiClassRateVal" style="font-weight: 800; color: var(--green-bright); font-size: 1.1rem; display: block; margin-top: 0.35rem;">R$ 80,00 por aula</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); padding: 2rem; border-radius: var(--radius-md); text-align: center;">
+          <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted);">Faturamento Potencial Liberado:</span>
+          <div id="roiTotalVal" style="font-size: 2.8rem; font-weight: 900; color: var(--yellow-brand); margin: 0.5rem 0;">R$ 960,00</div>
+          <p style="font-size: 0.85rem; color: #94A3B8;">Convertendo o tempo despendido fora do volante em aulas práticas rentáveis.</p>
+          <div style="margin-top: 1.5rem;">
+            <a href="https://wa.me/5596981461881?text=Quero%20liberar%20minha%20agenda%20e%20aumentar%20meu%20faturamento!" target="_blank" class="btn-whatsapp" style="width: 100%;">
+              <i class="fa-brands fa-whatsapp"></i> Falar com um Consultor
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; margin-bottom: 3.5rem;">
+        <div>
+          <img src="assets/logo.jpg" alt="Prepara Instrutor" style="height: 44px; margin-bottom: 1rem; border-radius: var(--radius-sm);">
+          <p style="font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            A central estratégica (B2B) focada exclusivamente no sucesso e aceleração de Instrutores de Trânsito Autônomos.
+          </p>
+          <p style="font-size: 0.75rem; color: var(--text-muted);">Documento Confidencial | Versão 1.2 | 2024</p>
+        </div>
+
+        <div>
+          <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 1.25rem;">Navegação</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.875rem;">
+            <li><a href="#servicos" style="color: var(--text-muted);">Portfólio de Serviços</a></li>
+            <li><a href="#orcamento" style="color: var(--text-muted);">Gerar Orçamento PDF</a></li>
+            <li><a href="#roi" style="color: var(--text-muted);">Análise de ROI</a></li>
+            <li><a href="#ciclo" style="color: var(--text-muted);">Ciclo de Crescimento</a></li>
+            <li><a href="#calculadora" style="color: var(--text-muted);">Simulador ROI</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 1.25rem;">Serviços</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.875rem;">
+            <li><a href="#servicos" style="color: var(--text-muted);">Assessoria Detran</a></li>
+            <li><a href="#servicos" style="color: var(--text-muted);">Kit Digital PDF</a></li>
+            <li><a href="#servicos" style="color: var(--text-muted);">Social Media & IA</a></li>
+            <li><a href="#servicos" style="color: var(--text-muted);">Tráfego Pago Local</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 1.25rem;">Atendimento Direto</h4>
+          <p style="font-size: 0.85rem; margin-bottom: 1rem; color: var(--text-muted);">Fale diretamente com nossa consultoria pelo WhatsApp:</p>
+          <a href="https://wa.me/5596981461881?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20atendimento." target="_blank" class="btn-whatsapp" style="width: 100%; font-size: 0.85rem; padding: 0.7rem;">
+            <i class="fa-brands fa-whatsapp"></i> (96) 98146-1881
+          </a>
+        </div>
+      </div>
+
+      <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 0.8rem;">
+        <p>&copy; 2026 Prepara Instrutor - Inteligência de Dados e Negócios. Todos os direitos reservados.</p>
+        <p><i class="fa-solid fa-lock" style="color: var(--green-bright);"></i> Central B2B para Instrutores Autônomos</p>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+  <!-- MODAL / CAMADA DE DETALHES DO PACOTE (SAIBA MAIS) -->
+  <div id="packageDetailModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div id="pkgModalIconBg" class="modal-icon-badge">
+            <i id="pkgModalIcon" class="fa-solid fa-box"></i>
+          </div>
+          <div>
+            <h3 id="pkgModalTitle" class="modal-title">Nome do Pacote</h3>
+          </div>
+        </div>
+        <button id="pkgModalCloseBtn" class="modal-close-btn" title="Fechar Modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-description-box">
+          <h4 style="font-size: 0.95rem; color: var(--navy-dark); margin-bottom: 0.5rem;"><i class="fa-solid fa-bullseye" style="color: var(--blue-brand);"></i> Proposta de Valor</h4>
+          <p id="pkgModalDescription" style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;"></p>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 0.95rem; color: var(--navy-dark); margin-bottom: 0.75rem;"><i class="fa-solid fa-list-check" style="color: var(--green-brand);"></i> Entregas Inclusas no Pacote</h4>
+          <ul id="pkgModalDeliverables" class="package-deliverables-list modal-deliverables-list">
+            <!-- Populated dynamically via JS -->
+          </ul>
+        </div>
+
+        <div class="modal-target-audience-box">
+          <h4 style="font-size: 0.9rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 0.35rem;"><i class="fa-solid fa-user-check" style="color: var(--yellow-brand);"></i> Indicado Para:</h4>
+          <p id="pkgModalAudience" style="font-size: 0.85rem; color: var(--text-muted);"></p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="pkgModalCloseFooter" class="btn-secondary" style="padding: 0.65rem 1.25rem; font-size: 0.85rem;">
+          Fechar
+        </button>
+        <a id="pkgModalWhatsappBtn" href="#" target="_blank" class="btn-whatsapp" style="padding: 0.65rem 1.5rem; font-size: 0.9rem;">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>Quero Conhecer Este Pacote</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
+
