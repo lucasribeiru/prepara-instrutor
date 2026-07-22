@@ -69,14 +69,15 @@ function initRoiCalculator() {
   if (!hoursInput || !rateInput) return;
 
   function updateRoi() {
-    const hours = parseInt(hoursInput.value);
-    const rate = parseInt(rateInput.value);
+    const hoursPerDay = parseInt(hoursInput.value);
+    const ratePerHour = parseInt(rateInput.value);
 
-    const totalReleasedRevenue = hours * rate;
+    // Calculado sobre 20 dias úteis no mês (Segunda a Sexta, sem sábados, domingos e feriados)
+    const monthlyRevenue = hoursPerDay * ratePerHour * 20;
 
-    hoursVal.textContent = `${hours} horas mensais`;
-    rateVal.textContent = `R$ ${rate},00 por aula`;
-    totalVal.textContent = `R$ ${totalReleasedRevenue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    hoursVal.textContent = `${hoursPerDay} horas por dia`;
+    rateVal.textContent = `R$ ${ratePerHour},00 por aula`;
+    totalVal.textContent = `R$ ${monthlyRevenue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   }
 
   hoursInput.addEventListener('input', updateRoi);

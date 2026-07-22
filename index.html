@@ -273,38 +273,45 @@
     </div>
   </section>
 
-  <!-- Simulador de ROI Interativo -->
+  <!-- Simulador de Faturamento Mensal -->
   <section id="calculadora" class="services-section" style="background: var(--bg-primary);">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Simulador de <span class="text-gradient-green">Retorno sobre Investimento</span></h2>
-        <p class="section-desc">Ao delegar marketing e burocracia, você libera horas para aulas práticas rentáveis.</p>
+        <h2 class="section-title">Simulador de <span class="text-gradient-green">Faturamento Mensal</span></h2>
+        <p class="section-desc">Calcule seu potencial de ganhos trabalhando com inteligência, previsibilidade e liberdade de tempo.</p>
       </div>
 
       <div class="calculator-box">
         <div>
-          <h3 style="font-size: 1.4rem; margin-bottom: 1rem; color: #FFFFFF;">Simule a economia e faturamento:</h3>
+          <h3 style="font-size: 1.4rem; margin-bottom: 1rem; color: #FFFFFF;">Simule sua rotina de aulas:</h3>
           
           <div style="margin-bottom: 1.5rem;">
-            <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">Horas Burocráticas Gastas por Mês:</label>
-            <input type="range" id="roiHours" class="range-input" min="4" max="30" step="2" value="12">
-            <span id="roiHoursVal" style="font-weight: 800; color: var(--yellow-brand); font-size: 1.1rem; display: block; margin-top: 0.35rem;">12 horas mensais</span>
+            <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">Horas de Aulas Práticas por Dia (Seg a Sex):</label>
+            <input type="range" id="roiHours" class="range-input" min="2" max="10" step="1" value="6">
+            <span id="roiHoursVal" style="font-weight: 800; color: var(--yellow-brand); font-size: 1.1rem; display: block; margin-top: 0.35rem;">6 horas por dia</span>
           </div>
 
           <div>
-            <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">Seu Valor Médio por Aula Prática:</label>
+            <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">Valor Cobrado por Hora/Aula:</label>
             <input type="range" id="roiClassRate" class="range-input" min="50" max="150" step="5" value="80">
             <span id="roiClassRateVal" style="font-weight: 800; color: var(--green-bright); font-size: 1.1rem; display: block; margin-top: 0.35rem;">R$ 80,00 por aula</span>
           </div>
         </div>
 
-        <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); padding: 2rem; border-radius: var(--radius-md); text-align: center;">
-          <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted);">Faturamento Potencial Liberado:</span>
-          <div id="roiTotalVal" style="font-size: 2.8rem; font-weight: 900; color: var(--yellow-brand); margin: 0.5rem 0;">R$ 960,00</div>
-          <p style="font-size: 0.85rem; color: #94A3B8;">Convertendo o tempo despendido fora do volante em aulas práticas rentáveis.</p>
-          <div style="margin-top: 1.5rem;">
-            <a href="https://wa.me/5596981461881?text=Quero%20liberar%20minha%20agenda%20e%20aumentar%20meu%20faturamento!" target="_blank" class="btn-whatsapp" style="width: 100%;">
-              <i class="fa-brands fa-whatsapp"></i> Falar com um Consultor
+        <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); padding: 2rem; border-radius: var(--radius-md); text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted);">Seu Ganho Mensal Estimado:</span>
+            <div id="roiTotalVal" style="font-size: 2.8rem; font-weight: 900; color: var(--green-bright); margin: 0.5rem 0;">R$ 9.600,00</div>
+          </div>
+
+          <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); padding: 0.85rem; border-radius: var(--radius-sm); margin: 1rem 0; font-size: 0.825rem; color: #E2E8F0; text-align: left;">
+            <i class="fa-solid fa-mug-hot" style="color: var(--green-bright); font-size: 1.1rem; margin-right: 0.4rem;"></i>
+            <strong>Qualidade de Vida:</strong> Calculado sobre 20 dias úteis (Segunda a Sexta). <strong>Sábados, domingos e feriados 100% livres para você!</strong>
+          </div>
+
+          <div>
+            <a href="https://wa.me/5596981461881?text=Quero%20alcan%C3%A7ar%20esse%20faturamento%20mensal%20com%20o%20Prepara%20Instrutor!" target="_blank" class="btn-whatsapp" style="width: 100%;">
+              <i class="fa-brands fa-whatsapp"></i> Quero Alcançar Esse Faturamento
             </a>
           </div>
         </div>
