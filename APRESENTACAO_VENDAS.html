@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apresentação Comercial & Pitch de Vendas | Acelera Instrutor</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- html2pdf.js for PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    :root {
+      --navy-dark: #0B1E36;
+      --navy-surface: #122846;
+      --blue-brand: #0047AB;
+      --blue-bright: #1D72F3;
+      --yellow-brand: #F4A900;
+      --yellow-bright: #FFB703;
+      --green-brand: #008744;
+      --green-bright: #10B981;
+      --bg-primary: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --text-main: #0B1E36;
+      --text-muted: #475569;
+      --border-color: rgba(15, 23, 42, 0.1);
+      --font-main: 'Montserrat', sans-serif;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-lg: 0 20px 40px rgba(11, 30, 54, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: #06111E;
+      color: #FFFFFF;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      overflow-x: hidden;
+    }
+
+    /* Controls Bar Top */
+    .controls-bar {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      background: rgba(18, 40, 70, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 0.85rem 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #FFFFFF;
+    }
+
+    .brand-title img {
+      height: 36px;
+      border-radius: 6px;
+    }
+
+    .action-btns {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-pdf {
+      background: linear-gradient(135deg, #10B981 0%, #008744 100%);
+      color: #FFFFFF;
+    }
+
+    .btn-pdf:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Deck View Container */
+    .deck-container {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 9;
+      background: var(--navy-dark);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: scale(0.98);
+      background: radial-gradient(circle at 90% 10%, rgba(0, 71, 171, 0.15) 0%, transparent 60%),
+                  radial-gradient(circle at 10% 90%, rgba(244, 169, 0, 0.1) 0%, transparent 50%),
+                  #0B1E36;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    /* Slide Header & Footer */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 1rem;
+    }
+
+    .slide-tag {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--yellow-bright);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1rem;
+      font-size: 0.8rem;
+      color: #94A3B8;
+    }
+
+    /* Slide Content Typo */
+    .slide-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.2;
+      color: #FFFFFF;
+      margin-bottom: 1rem;
+    }
+
+    .slide-subtitle {
+      font-size: 1.1rem;
+      color: #94A3B8;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    .text-gold { color: var(--yellow-bright); }
+    .text-green { color: var(--green-bright); }
+    .text-blue { color: var(--blue-bright); }
+
+    /* Grid Layouts for Slides */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin: auto 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: auto 0;
+    }
+
+    .card-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      transition: all 0.3s ease;
+    }
+
+    .card-box:hover {
+      border-color: var(--yellow-brand);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--yellow-bright);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: #FFFFFF;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: #94A3B8;
+      line-height: 1.5;
+    }
+
+    /* Deck Navigation Footer */
+    .nav-bar {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.25rem;
+    }
+
+    .nav-arrows {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn-nav {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-nav:hover {
+      background: var(--yellow-brand);
+      color: #0B1E36;
+    }
+
+    .slide-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: var(--yellow-bright);
+      width: 28px;
+      border-radius: 10px;
+    }
+
+    /* Print / PDF Styles */
+    @media print {
+      body {
+        background: #FFFFFF;
+        color: #0B1E36;
+        padding: 0;
+      }
+      .controls-bar, .nav-bar {
+        display: none !important;
+      }
+      .deck-container {
+        max-width: 100%;
+        box-shadow: none;
+        border: none;
+      }
+      .slide {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        page-break-after: always;
+        background: #0B1E36 !important;
+        height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Controls Bar -->
+  <div class="controls-bar">
+    <div class="brand-title">
+      <img src="assets/logo.jpg" alt="Acelera Instrutor">
+      <span>Acelera Instrutor | Pitch de Vendas</span>
+    </div>
+    <div class="action-btns">
+      <a href="index.html" class="btn-action btn-secondary">
+        <i class="fa-solid fa-arrow-left"></i> Voltar ao Site
+      </a>
+      <button id="btnExportPdf" class="btn-action btn-pdf">
+        <i class="fa-solid fa-file-pdf"></i> Baixar Apresentação (PDF)
+      </button>
+    </div>
+  </div>
+
+  <!-- Deck Main Container -->
+  <div id="deckContent" class="deck-container">
+
+    <!-- SLIDE 1: Capa -->
+    <div class="slide active">
+      <div class="slide-header">
+        <span class="slide-tag"><i class="fa-solid fa-rocket"></i> Apresentação Comercial B2B</span>
+        <span>Acelera Instrutor 2026</span>
+      </div>
+
+      <div style="margin: auto 0; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto;">
+        <img src="assets/logo.jpg" alt="Logo Acelera Instrutor" style="width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--yellow-brand); margin-bottom: 1.5rem; box-shadow: 0 0 25px rgba(244,169,0,0.3);">
+        <h1 class="slide-title" style="font-size: 3rem;">
+          Do Credenciamento à <span class="text-gold">AGENDA CHEIA</span>
+        </h1>
+        <p class="slide-subtitle" style="margin: 0 auto; font-size: 1.25rem;">
+          Aceleradora nº 1 de Instrutores de Trânsito Autônomos. Aumente seu faturamento, estruture sua captação de alunos e ganhe até R$ 12.000/mês sem depender de autoescolas.
+        </p>
+      </div>
+
+      <div class="slide-footer">
+        <span>Confidencial | Apresentação de Negócios</span>
+        <span>Slide 01 de 08</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: O Problema -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="slide-tag"><i class="fa-solid fa-triangle-exclamation"></i> O Cenário Atual</span>
+        <span>Acelera Instrutor</span>
+      </div>
+
+      <div>
+        <h2 class="slide-title">Os 3 Grandes Gargalos do <span class="text-gold">Instrutor Autônomo</span></h2>
+        <p class="slide-subtitle">A maioria dos instrutores qualificados perde dinheiro e tempo por falta de estrutura de negócios.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card-box">
+          <i class="fa-solid fa-file-contract card-icon" style="color: #EF4444;"></i>
+          <h3 class="card-title">1. Burocracia do Detran</h3>
+          <p class="card-desc">Insegurança jurídica, demora em certidões e falta de conhecimento técnico para credenciamento autônomo.</p>
+        </div>
+
+        <div class="card-box">
+          <i class="fa-solid fa-calendar-xmark card-icon" style="color: #EF4444;"></i>
+          <h3 class="card-title">2. Agenda Inconstante</h3>
+          <p class="card-desc">Dependência de indicação boca a boca, resultando em meses de agenda vazia e sem previsibilidade financeira.</p>
+        </div>
+
+        <div class="card-box">
+          <i class="fa-solid fa-hand-holding-dollar card-icon" style="color: #EF4444;"></i>
+          <h3 class="card-title">3. Repasse de Comissões</h3>
+          <p class="card-desc">Ficar refém de intermediários e autoescolas tradicionais que ficam com a maior fatia do valor da sua aula.</p>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Acelera Instrutor | Inteligência de Negócios</span>
+        <span>Slide 02 de 08</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: A Solução -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="slide-tag"><i class="fa-solid fa-shield-halved"></i> Nossa Solução</span>
+        <span>Acelera Instrutor</span>
+      </div>
+
+      <div>
+        <h2 class="slide-title">Sua Estrutura Completa de <span class="text-green">Aceleração 360°</span></h2>
+        <p class="slide-subtitle">Nós construímos a sua máquina de captação e burocracia. Você foca apenas em dar aulas.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card-box">
+          <i class="fa-solid fa-gears card-icon" style="color: var(--blue-bright);"></i>
+          <h3 class="card-title">Máquina de Captação Automática</h3>
+          <p class="card-desc">Anúncios locais geolocalizados no Instagram/Meta Ads direcionando potenciais alunos prontos para fechar aulas diretamente no seu WhatsApp.</p>
+        </div>
+
+        <div class="card-box">
+          <i class="fa-solid fa-scale-balanced card-icon" style="color: var(--green-bright);"></i>
+          <h3 class="card-title">100% do Lucro é Seu</h3>
+          <p class="card-desc">Não cobramos comissões sobre suas aulas. Todo o valor pago pelos alunos vai integralmente para a sua conta bancária.</p>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Acelera Instrutor | Solução B2B</span>
+        <span>Slide 03 de 08</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: O Método -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="slide-tag"><i class="fa-solid fa-map"></i> O Método</span>
+        <span>Acelera Instrutor</span>
+      </div>
+
+      <div>
+        <h2 class="slide-title">Cronograma de Aceleração de <span class="text-gold">30 Dias</span></h2>
+        <p class="slide-subtitle">Um passo a passo estruturado para transformar o seu negócio no seu primeiro mês.</p>
+      </div>
+
+      <div class="grid-3" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="card-box">
+          <div style="font-size: 1.5rem; font-weight: 900; color: var(--yellow-bright); margin-bottom: 0.5rem;">01</div>
+          <h3 class="card-title">Diagnóstico & Setup</h3>
+          <p class="card-desc">Mapeamento da rotina, configuração de anúncios e regularização burocrática.</p>
+        </div>
+        <div class="card-box">
+          <div style="font-size: 1.5rem; font-weight: 900; color: var(--green-bright); margin-bottom: 0.5rem;">02</div>
+          <h3 class="card-title">Treinamento Vendas</h3>
+          <p class="card-desc">Scripts validados de atendimento no WhatsApp para fechar pacotes sem dar descontos.</p>
+        </div>
+        <div class="card-box">
+          <div style="font-size: 1.5rem; font-weight: 900; color: var(--blue-bright); margin-bottom: 0.5rem;">03</div>
+          <h3 class="card-title">Ativação & Escala</h3>
+          <p class="card-desc">Campanhas no ar, atração contínua de alunos e relatórios de inteligência de negócios.</p>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Acelera Instrutor | Método de 30 Dias</span>
+        <span>Slide 04 de 08</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: Retorno Financeiro -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="slide-tag"><i class="fa-solid fa-calculator"></i> Potencial Financeiro</span>
+        <span>Acelera Instrutor</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <h2 class="slide-title">Simulação de Faturamento Mensal</h2>
+          <p class="slide-subtitle" style="margin-bottom: 1.5rem;">Cálculo baseado em 20 dias úteis de trabalho (Segunda a Sexta):</p>
+
+          <div style="background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid var(--yellow-bright);">
+            <div style="font-size: 0.9rem; color: #94A3B8;">Rotina de 6 Horas / Dia x R$ 100/aula:</div>
+            <div style="font-size: 2.2rem; font-weight: 900; color: var(--green-bright);">R$ 12.000,00 / mês</div>
+          </div>
+        </div>
+
+        <div class="card-box" style="border-color: var(--green-bright); background: rgba(16, 185, 129, 0.08);">
+          <i class="fa-solid fa-circle-check card-icon" style="color: var(--green-bright);"></i>
+          <h3 class="card-title" style="color: var(--green-bright);">Retorno de Investimento Rápido</h3>
+          <p class="card-desc" style="color: #E2E8F0;">
+            Com a estruturação da sua máquina de vendas, o investimento do primeiro mês é recuperado logo nas primeiras semanas de aulas agendadas.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Acelera Instrutor | Retorno de Investimento</span>
+        <span>Slide 05 de 08</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: Pacotes Comercializados -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="slide-tag"><i class="fa-solid fa-box-open"></i> Nossos Pacotes</span>
+        <span>Acelera Instrutor</span>
+      </div>
+
+      <div>
+        <h2 class="slide-title">Soluções Modulares sob Demanda</h2>
+      </div>
+
+      <div class="grid-3">
+        <div class="card-box">
+          <h3 class="card-title" style="color: var(--blue-bright);">Fase 1: Burocracia</h3>
+          <p class="card-desc">Assessoria Detran, ofícios, certidões e kit digital em PDF.</p>
+        </div>
+        <div class="card-box">
+          <h3 class="card-title" style="color: var(--yellow-bright);">Fase 2: Captação</h3>
+          <p class="card-desc">Instagram profissional, vídeos em IA e Tráfego Pago Meta Ads.</p>
+        </div>
+        <div class="card-box" style="border-color: var(--green-bright);">
+          <h3 class="card-title" style="color: var(--green-bright);">Pacote Premium 360°</h3>
+          <p class="card-desc">O ecossistema completo: Burocracia + Captação + Treinamento de Vendas.</p>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Acelera Instrutor | Portfólio B2B</span>
+        <span>Slide 06 de 08</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: Garantia Risco Zero -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="slide-tag"><i class="fa-solid fa-lock"></i> Risco Zero</span>
+        <span>Acelera Instrutor</span>
+      </div>
+
+      <div style="margin: auto 0; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <i class="fa-solid fa-shield-halved" style="font-size: 3.5rem; color: var(--yellow-bright); margin-bottom: 1rem;"></i>
+        <h2 class="slide-title">Garantia Incondicional de <span class="text-gold">7 Dias</span></h2>
+        <p class="slide-subtitle" style="margin: 0 auto; font-size: 1.15rem;">
+          Você tem 7 dias inteiros a partir da reunião de alinhamento para avaliar nossa parceria. Se achar que não é o seu momento, devolvemos 100% do valor pago. Sem multas e sem burocracia.
+        </p>
+      </div>
+
+      <div class="slide-footer">
+        <span>Acelera Instrutor | Garantia de Satisfação</span>
+        <span>Slide 07 de 08</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: CTA Final -->
+    <div class="slide">
+      <div class="slide-header">
+        <span class="slide-tag"><i class="fa-solid fa-paper-plane"></i> Próximo Passo</span>
+        <span>Acelera Instrutor</span>
+      </div>
+
+      <div style="margin: auto 0; text-align: center;">
+        <h2 class="slide-title" style="font-size: 2.8rem;">Pronto para Acelerar a sua Agenda?</h2>
+        <p class="slide-subtitle" style="margin: 0 auto 2rem auto;">
+          Fale agora com a nossa equipe de consultoria estratégica e garanta a sua vaga na próxima turma.
+        </p>
+        <a href="https://wa.me/5596981461881?text=Ol%C3%A1!%20Assisti%20%C3%A0%20apresenta%C3%A7%C3%A3o%20e%20quero%20acelerar%20meu%20neg%C3%B3cio!" target="_blank" class="btn-action btn-pdf" style="font-size: 1.1rem; padding: 1rem 2.5rem;">
+          <i class="fa-brands fa-whatsapp"></i> Falar com a Consultoria pelo WhatsApp
+        </a>
+      </div>
+
+      <div class="slide-footer">
+        <span>&copy; 2026 Acelera Instrutor - Todos os direitos reservados.</span>
+        <span>Slide 08 de 08</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Deck Navigation Footer -->
+  <div class="nav-bar">
+    <div class="nav-arrows">
+      <button id="btnPrev" class="btn-nav" title="Slide Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button id="btnNext" class="btn-nav" title="Próximo Slide"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <div id="dotsContainer" class="slide-dots">
+      <!-- Generated via JS -->
+    </div>
+
+    <div style="font-size: 0.85rem; color: #94A3B8;">
+      <i class="fa-solid fa-keyboard"></i> Use as setas ◄ ► do teclado
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.slide');
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
+      const dotsContainer = document.getElementById('dotsContainer');
+      const btnExportPdf = document.getElementById('btnExportPdf');
+      let currentSlide = 0;
+
+      // Create dots
+      slides.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = `dot ${idx === 0 ? 'active' : ''}`;
+        dot.addEventListener('click', () => goToSlide(idx));
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = document.querySelectorAll('.dot');
+
+      function updateSlides() {
+        slides.forEach((slide, idx) => {
+          slide.classList.toggle('active', idx === currentSlide);
+        });
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentSlide);
+        });
+      }
+
+      function goToSlide(idx) {
+        currentSlide = idx;
+        updateSlides();
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateSlides();
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateSlides();
+      }
+
+      btnNext.addEventListener('click', nextSlide);
+      btnPrev.addEventListener('click', prevSlide);
+
+      // Keyboard support
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'Space') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+      });
+
+      // Export to PDF
+      if (btnExportPdf) {
+        btnExportPdf.addEventListener('click', () => {
+          btnExportPdf.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Gerando PDF...';
+          window.print();
+          setTimeout(() => {
+            btnExportPdf.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Baixar Apresentação (PDF)';
+          }, 2000);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

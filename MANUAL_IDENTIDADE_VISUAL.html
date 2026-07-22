@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual de Identidade Visual & Guia de Marca | Acelera Instrutor</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- html2pdf.js for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    :root {
+      --navy-dark: #0B1E36;
+      --navy-surface: #122846;
+      --blue-brand: #0047AB;
+      --blue-bright: #1D72F3;
+      --yellow-brand: #F4A900;
+      --yellow-bright: #FFB703;
+      --green-brand: #008744;
+      --green-bright: #10B981;
+      --bg-light: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --text-main: #0B1E36;
+      --text-muted: #475569;
+      --border-color: rgba(15, 23, 42, 0.12);
+      --font-main: 'Montserrat', sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .header-bar {
+      max-width: 1000px;
+      margin: 0 auto 2rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--navy-dark);
+      color: #FFFFFF;
+      padding: 1.25rem 2rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 25px rgba(11, 30, 54, 0.15);
+    }
+
+    .btn-export {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, #10B981 0%, #008744 100%);
+      color: #FFFFFF;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-export:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Document Canvas Container */
+    .document-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+      padding: 3.5rem;
+    }
+
+    /* Document Typography */
+    .doc-header-brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--yellow-brand);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .doc-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--navy-dark);
+      line-height: 1.2;
+    }
+
+    .doc-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--navy-dark);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-title i {
+      color: var(--blue-brand);
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+      font-size: 0.95rem;
+    }
+
+    /* Color Swatches Grid */
+    .colors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .color-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .color-swatch {
+      height: 110px;
+      width: 100%;
+    }
+
+    .color-info {
+      padding: 1rem;
+      background: #FFFFFF;
+    }
+
+    .color-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--navy-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .color-code {
+      font-size: 0.85rem;
+      font-family: monospace;
+      color: var(--text-muted);
+    }
+
+    /* Correct vs Forbidden Usages Grid */
+    .usage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .usage-card {
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      border: 2px solid;
+    }
+
+    .usage-correct {
+      border-color: var(--green-brand);
+      background: rgba(0, 135, 68, 0.04);
+    }
+
+    .usage-incorrect {
+      border-color: #EF4444;
+      background: rgba(239, 68, 68, 0.04);
+    }
+
+    .usage-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .usage-correct .usage-header { color: var(--green-brand); }
+    .usage-incorrect .usage-header { color: #EF4444; }
+
+    /* Applications & Mockup Grid */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .app-card {
+      background: var(--bg-light);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+    }
+
+    .app-card-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--navy-dark);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .app-card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #FFFFFF;
+        padding: 0;
+      }
+      .header-bar {
+        display: none !important;
+      }
+      .document-container {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .section-title {
+        page-break-before: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Action Bar -->
+  <div class="header-bar">
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <img src="assets/logo.jpg" alt="Acelera Instrutor" style="height: 40px; border-radius: 6px;">
+      <div>
+        <h2 style="font-size: 1.1rem; font-weight: 800;">Acelera Instrutor</h2>
+        <span style="font-size: 0.8rem; opacity: 0.8;">Manual de Identidade Visual e Guia de Marca</span>
+      </div>
+    </div>
+    <div style="display: flex; gap: 0.75rem;">
+      <a href="index.html" class="btn-export" style="background: rgba(255,255,255,0.15);">
+        <i class="fa-solid fa-arrow-left"></i> Voltar ao Site
+      </a>
+      <button id="btnDownloadPdf" class="btn-export">
+        <i class="fa-solid fa-file-pdf"></i> Baixar Manual em PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- Document Canvas -->
+  <div id="pdfContent" class="document-container">
+
+    <!-- Document Header -->
+    <div class="doc-header-brand">
+      <div>
+        <h1 class="doc-title">Manual de Identidade Visual</h1>
+        <p class="doc-subtitle">Diretrizes Oficiais de Marca, Cores, Tipografia e Aplicações B2B</p>
+      </div>
+      <img src="assets/logo.jpg" alt="Logo Acelera Instrutor" style="width: 90px; height: 90px; border-radius: 12px; border: 2px solid var(--border-color);">
+    </div>
+
+    <!-- 1. Conceito e Arquétipo -->
+    <section>
+      <h2 class="section-title"><i class="fa-solid fa-compass"></i> 1. Conceito & Posicionamento de Marca</h2>
+      <p class="section-desc">
+        O **Acelera Instrutor** posiciona-se como a central estratégica e aceleradora número 1 de Instrutores de Trânsito Autônomos. A marca transmite **Autoridade**, **Previsibilidade Financeira**, **Segurança Jurídica** e **Inovação Tecnológica**.
+      </p>
+      <div style="background: var(--navy-dark); color: #FFFFFF; padding: 1.5rem; border-radius: var(--radius-md); display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: center;">
+        <div>
+          <i class="fa-solid fa-shield-halved" style="font-size: 1.8rem; color: var(--yellow-bright); margin-bottom: 0.5rem;"></i>
+          <h4 style="font-size: 1rem; font-weight: 800;">Autoridade & Confiança</h4>
+          <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.25rem;">Representada pelo Navy Blue corporativo.</p>
+        </div>
+        <div>
+          <i class="fa-solid fa-chart-line" style="font-size: 1.8rem; color: var(--green-bright); margin-bottom: 0.5rem;"></i>
+          <h4 style="font-size: 1rem; font-weight: 800;">Prosperidade & Lucro</h4>
+          <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.25rem;">Representada pelo Verde Esmeralda.</p>
+        </div>
+        <div>
+          <i class="fa-solid fa-bolt" style="font-size: 1.8rem; color: var(--yellow-bright); margin-bottom: 0.5rem;"></i>
+          <h4 style="font-size: 1rem; font-weight: 800;">Velocidade & Aceleração</h4>
+          <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.25rem;">Representada pelo Amarelo Ouro.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Paleta de Cores Oficial -->
+    <section>
+      <h2 class="section-title"><i class="fa-solid fa-palette"></i> 2. Paleta de Cores Oficial</h2>
+      <p class="section-desc">
+        A paleta foi rigorosamente selecionada para garantir legibilidade, passar ar corporativo de alto nível e estimular a conversão de vendas nos botões de ação.
+      </p>
+
+      <div class="colors-grid">
+        <div class="color-card">
+          <div class="color-swatch" style="background: #0B1E36;"></div>
+          <div class="color-info">
+            <div class="color-name">Primary Navy Blue</div>
+            <div class="color-code">HEX: #0B1E36</div>
+            <div class="color-code">RGB: (11, 30, 54)</div>
+            <div class="color-code">CMYK: 80%, 44%, 0%, 79%</div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background: #0047AB;"></div>
+          <div class="color-info">
+            <div class="color-name">Royal Blue (Destaques)</div>
+            <div class="color-code">HEX: #0047AB</div>
+            <div class="color-code">RGB: (0, 71, 171)</div>
+            <div class="color-code">CMYK: 100%, 58%, 0%, 33%</div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background: #F4A900;"></div>
+          <div class="color-info">
+            <div class="color-name">Brand Gold (Aceleração)</div>
+            <div class="color-code">HEX: #F4A900</div>
+            <div class="color-code">RGB: (244, 169, 0)</div>
+            <div class="color-code">CMYK: 0%, 31%, 100%, 4%</div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-swatch" style="background: #008744;"></div>
+          <div class="color-info">
+            <div class="color-name">Emerald Green (Conversão)</div>
+            <div class="color-code">HEX: #008744</div>
+            <div class="color-code">RGB: (0, 135, 68)</div>
+            <div class="color-code">CMYK: 100%, 0%, 50%, 47%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Usos Corretos e Proibidos -->
+    <section>
+      <h2 class="section-title"><i class="fa-solid fa-eye"></i> 3. Diretrizes de Uso da Logomarca</h2>
+      <p class="section-desc">Para preservar a integridade da marca, siga rigorosamente as regras de aplicação em fundos e proibições de distorção.</p>
+
+      <div class="usage-grid">
+        <div class="usage-card usage-correct">
+          <div class="usage-header"><i class="fa-solid fa-circle-check"></i> Aplicações Permitidas</div>
+          <ul style="font-size: 0.9rem; color: var(--text-muted); list-style: square; padding-left: 1.25rem; line-height: 1.7;">
+            <li>Aplicação da logo oficial sobre fundos claros (#FFFFFF, #F8FAFC).</li>
+            <li>Aplicação sobre fundo escuro (#0B1E36) utilizando a borda amarela de contraste.</li>
+            <li>Respeitar a área mínima de proteção de 15px em volta da logo.</li>
+            <li>Manter a proporção 1:1 (quadrada) ou horizontal oficial.</li>
+          </ul>
+        </div>
+
+        <div class="usage-card usage-incorrect">
+          <div class="usage-header"><i class="fa-solid fa-circle-xmark"></i> Usos Proibidos</div>
+          <ul style="font-size: 0.9rem; color: var(--text-muted); list-style: square; padding-left: 1.25rem; line-height: 1.7;">
+            <li><strong>Nunca</strong> achatar ou esticar a imagem desproporcionalmente.</li>
+            <li><strong>Nunca</strong> aplicar a logo em fundos com baixo contraste (ex: vermelho ou azul ciano).</li>
+            <li><strong>Nunca</strong> alterar a tipografia original do nome da marca.</li>
+            <li><strong>Nunca</strong> aplicar efeitos de sombra exagerados ou filtros de cor.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Tipografia Oficial -->
+    <section>
+      <h2 class="section-title"><i class="fa-solid fa-font"></i> 4. Tipografia Institucional</h2>
+      <p class="section-desc">A família tipográfica oficial é a **Montserrat** (Google Font). Deve ser utilizada em todos os materiais digitais e impressos.</p>
+
+      <div style="background: var(--bg-light); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius-md);">
+        <div style="font-size: 1.8rem; font-weight: 900; color: var(--navy-dark); margin-bottom: 0.25rem;">Montserrat Black (900) - Títulos Principais</div>
+        <div style="font-size: 1.3rem; font-weight: 700; color: var(--blue-brand); margin-bottom: 0.25rem;">Montserrat Bold (700) - Subtítulos & Botões</div>
+        <div style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">Montserrat Medium (500) - Corpo de texto e descrições técnicas</div>
+      </div>
+    </section>
+
+    <!-- 5. Aplicações Práticas -->
+    <section>
+      <h2 class="section-title"><i class="fa-solid fa-box-archive"></i> 5. Aplicações da Identidade Visual</h2>
+      <p class="section-desc">Exemplos de como aplicar a marca nos diferentes pontos de contato comercial com o instrutor e o aluno final.</p>
+
+      <div class="app-grid">
+        <div class="app-card">
+          <h3 class="app-card-title"><i class="fa-solid fa-car" style="color: var(--yellow-brand);"></i> Adesivação do Veículo (Detran)</h3>
+          <p class="app-card-desc">
+            Adesivo microperfurado para o vidro traseiro e portas laterais do carro de instrução. Utiliza a marca oficial com o telefone do WhatsApp e as normas de metragem exigidas pelo Detran.
+          </p>
+        </div>
+
+        <div class="app-card">
+          <h3 class="app-card-title"><i class="fa-solid fa-hashtag" style="color: var(--blue-brand);"></i> Redes Sociais & Ads</h3>
+          <p class="app-card-desc">
+            Padrão de posts 1080x1080px e Stories 1080x1920px no Instagram. Moldura corporativa com Navy Blue e botões verdes em destaque chamando para a ação no WhatsApp.
+          </p>
+        </div>
+
+        <div class="app-card">
+          <h3 class="app-card-title"><i class="fa-solid fa-id-card" style="color: var(--green-brand);"></i> Papelaria & Cartão Digital</h3>
+          <p class="app-card-desc">
+            Cartão de visitas em PVC ou papel 300g com acabamento fosco e verniz localizado na logo. Cartão interativo em PDF para envio via WhatsApp com botões clicáveis.
+          </p>
+        </div>
+
+        <div class="app-card">
+          <h3 class="app-card-title"><i class="fa-solid fa-shirt" style="color: var(--navy-dark);"></i> Uniforme & Camisa Polo</h3>
+          <p class="app-card-desc">
+            Camisa Polo em malha DryFit ou Algodão na cor Azul Marinho (#0B1E36) com bordado da logo no peito esquerdo e a inscrição "Instrutor Credenciado" nas costas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Document Footer -->
+    <div style="margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);">
+      <span>&copy; 2026 Acelera Instrutor - Guia de Marca Confidencial v1.0</span>
+      <span>Documentação Técnica B2B</span>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnDownloadPdf = document.getElementById('btnDownloadPdf');
+
+      if (btnDownloadPdf) {
+        btnDownloadPdf.addEventListener('click', () => {
+          btnDownloadPdf.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Gerando PDF...';
+          window.print();
+          setTimeout(() => {
+            btnDownloadPdf.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Baixar Manual em PDF';
+          }, 2000);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

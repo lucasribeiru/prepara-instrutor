@@ -9,6 +9,8 @@ O **Acelera Instrutor** é uma plataforma web desenvolvida para atuar como a pri
 ## 📋 Sumário de Documentação
 
 - [📖 README.md](README.md) - Visão Geral, Tecnologias e Instalação (este arquivo)
+- [🖥️ APRESENTACAO_VENDAS.html](APRESENTACAO_VENDAS.html) - Pitch Deck de Vendas Comercial (Slides Interativos em HTML/PDF)
+- [🎨 MANUAL_IDENTIDADE_VISUAL.html](MANUAL_IDENTIDADE_VISUAL.html) - Guia de Marca & Manual de ID Visual Oficial (PDF/Web)
 - [🏗️ ARCHITECTURE.md](ARCHITECTURE.md) - Arquitetura Frontend, Diagramas Mermaid e Fluxo de Dados
 - [⚡ FEATURES.md](FEATURES.md) - Especificação Funcional dos Módulos (Calculadora ROI, PDF, Modais)
 - [🛠️ GUIA_DE_MANUTENCAO.md](GUIA_DE_MANUTENCAO.md) - Manual do Desenvolvedor para Alterações de Preços, Contatos e Textos
