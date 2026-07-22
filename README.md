@@ -17,6 +17,22 @@ O **Acelera Instrutor** é uma plataforma web desenvolvida para atuar como a pri
 
 ---
 
+## 🔗 Links Públicos para Compartilhamento na Web
+
+Acesse e compartilhe diretamente qualquer recurso ou documento do projeto pelos links públicos hospedados:
+
+| Recurso / Documento | Descrição | Link de Compartilhamento na Web |
+| :--- | :--- | :--- |
+| 📂 **Central de Links Web** | Hub unificado com todos os recursos e botões de cópia | [Acessar Hub de Links](https://lucasribeiru.github.io/prepara-instrutor/DOCS.html) |
+| 🌐 **Landing Page Principal** | Site B2B completo com simulador ROI e orçamentos | [Acessar Site](https://lucasribeiru.github.io/prepara-instrutor/) |
+| 🖥️ **Pitch de Vendas (Slides)** | Apresentação comercial de 8 slides para vendas | [Abrir Apresentação](https://lucasribeiru.github.io/prepara-instrutor/APRESENTACAO_VENDAS.html) |
+| 🎨 **Manual de ID Visual (PDF)** | Guia oficial de marca, cores CMYK/HEX e veículo | [Abrir Manual](https://lucasribeiru.github.io/prepara-instrutor/MANUAL_IDENTIDADE_VISUAL.html) |
+| 🏗️ **Arquitetura & Diagramas** | Diagramas em Mermaid e especificações frontend | [Ver no GitHub](https://github.com/lucasribeiru/prepara-instrutor/blob/main/ARCHITECTURE.md) |
+| ⚡ **Especificações de Módulos** | Regras de negócio e matemática do Simulador ROI | [Ver no GitHub](https://github.com/lucasribeiru/prepara-instrutor/blob/main/FEATURES.md) |
+| 🛠️ **Guia de Manutenção** | Instruções de edição de preços e contatos | [Ver no GitHub](https://github.com/lucasribeiru/prepara-instrutor/blob/main/GUIA_DE_MANUTENCAO.md) |
+
+---
+
 ## ✨ Funcionalidades Principais
 
 1. **🧮 Simulador de Ganhos (Calculadora ROI)**:

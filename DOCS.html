@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central de Documentos & Links Web | Acelera Instrutor</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --navy-dark: #0B1E36;
+      --navy-surface: #122846;
+      --blue-brand: #0047AB;
+      --blue-bright: #1D72F3;
+      --yellow-brand: #F4A900;
+      --yellow-bright: #FFB703;
+      --green-brand: #008744;
+      --green-bright: #10B981;
+      --bg-light: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --text-main: #0B1E36;
+      --text-muted: #475569;
+      --border-color: rgba(15, 23, 42, 0.12);
+      --font-main: 'Montserrat', sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .header-card {
+      background: var(--navy-dark);
+      color: #FFFFFF;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      margin-bottom: 2rem;
+      box-shadow: 0 15px 35px rgba(11, 30, 54, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .header-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .header-subtitle {
+      font-size: 1.05rem;
+      opacity: 0.85;
+      margin-top: 0.5rem;
+    }
+
+    .grid-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .link-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25 ease;
+    }
+
+    .link-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+      border-color: var(--blue-bright);
+    }
+
+    .link-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .icon-blue { background: rgba(0, 71, 171, 0.1); color: var(--blue-brand); }
+    .icon-yellow { background: rgba(244, 169, 0, 0.15); color: #B37B00; }
+    .icon-green { background: rgba(0, 135, 68, 0.1); color: var(--green-brand); }
+    .icon-purple { background: rgba(147, 51, 234, 0.1); color: #9333EA; }
+
+    .link-card-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--navy-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .link-card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .link-url-box {
+      background: var(--bg-light);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-family: monospace;
+      color: var(--text-muted);
+      word-break: break-all;
+      margin-bottom: 1rem;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-card {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.65rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-open {
+      background: var(--navy-dark);
+      color: #FFFFFF;
+    }
+
+    .btn-open:hover {
+      background: var(--blue-brand);
+    }
+
+    .btn-copy {
+      background: var(--bg-light);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-copy:hover {
+      border-color: var(--green-brand);
+      color: var(--green-brand);
+    }
+
+    .btn-wa {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--green-brand);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-wa:hover {
+      background: var(--green-brand);
+      color: #FFFFFF;
+    }
+
+    /* Notification Toast */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--navy-dark);
+      color: #FFFFFF;
+      padding: 0.85rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border-left: 4px solid var(--green-bright);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .toast.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header Banner -->
+    <div class="header-card">
+      <div>
+        <h1 class="header-title">Central de Documentos & Links Web</h1>
+        <p class="header-subtitle">Espaço oficial para visualizar e compartilhar todos os recursos, manuais e apresentações do Acelera Instrutor na web.</p>
+      </div>
+      <img src="assets/logo.jpg" alt="Acelera Instrutor" style="width: 90px; height: 90px; border-radius: 16px; border: 3px solid var(--yellow-brand);">
+    </div>
+
+    <!-- Section Title -->
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--navy-dark); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+      <i class="fa-solid fa-share-nodes" style="color: var(--blue-brand);"></i> Links Públicos para Compartilhamento
+    </h2>
+
+    <!-- Links Grid -->
+    <div class="grid-links">
+
+      <!-- 1. Landing Page -->
+      <div class="link-card">
+        <div>
+          <div class="link-icon icon-blue"><i class="fa-solid fa-globe"></i></div>
+          <h3 class="link-card-title">1. Site Principal (Landing Page)</h3>
+          <p class="link-card-desc">Página institucional B2B completa com o simulador de ganhos, tabela de serviços e formulário de orçamentos.</p>
+        </div>
+        <div>
+          <div class="link-url-box" id="url-site">https://lucasribeiru.github.io/prepara-instrutor/</div>
+          <div class="card-actions">
+            <a href="index.html" target="_blank" class="btn-card btn-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir</a>
+            <button class="btn-card btn-copy" onclick="copyLink('https://lucasribeiru.github.io/prepara-instrutor/')"><i class="fa-solid fa-copy"></i> Copiar</button>
+            <button class="btn-card btn-wa" onclick="shareWa('Site Principal Acelera Instrutor', 'https://lucasribeiru.github.io/prepara-instrutor/')"><i class="fa-brands fa-whatsapp"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Presentation Deck -->
+      <div class="link-card">
+        <div>
+          <div class="link-icon icon-yellow"><i class="fa-solid fa-person-chalkboard"></i></div>
+          <h3 class="link-card-title">2. Pitch de Vendas (Slides)</h3>
+          <p class="link-card-desc">Apresentação comercial interativa de 8 slides para reuniões de vendas e pitch para instrutores autônomos.</p>
+        </div>
+        <div>
+          <div class="link-url-box" id="url-pitch">https://lucasribeiru.github.io/prepara-instrutor/APRESENTACAO_VENDAS.html</div>
+          <div class="card-actions">
+            <a href="APRESENTACAO_VENDAS.html" target="_blank" class="btn-card btn-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir</a>
+            <button class="btn-card btn-copy" onclick="copyLink('https://lucasribeiru.github.io/prepara-instrutor/APRESENTACAO_VENDAS.html')"><i class="fa-solid fa-copy"></i> Copiar</button>
+            <button class="btn-card btn-wa" onclick="shareWa('Apresentação Comercial Acelera Instrutor', 'https://lucasribeiru.github.io/prepara-instrutor/APRESENTACAO_VENDAS.html')"><i class="fa-brands fa-whatsapp"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Brand Identity Manual -->
+      <div class="link-card">
+        <div>
+          <div class="link-icon icon-green"><i class="fa-solid fa-palette"></i></div>
+          <h3 class="link-card-title">3. Manual de Identidade Visual</h3>
+          <p class="link-card-desc">Guia oficial de marca contendo cores, códigos CMYK/HEX, tipografia, adesivação de veículos e exportador para PDF.</p>
+        </div>
+        <div>
+          <div class="link-url-box" id="url-brand">https://lucasribeiru.github.io/prepara-instrutor/MANUAL_IDENTIDADE_VISUAL.html</div>
+          <div class="card-actions">
+            <a href="MANUAL_IDENTIDADE_VISUAL.html" target="_blank" class="btn-card btn-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir</a>
+            <button class="btn-card btn-copy" onclick="copyLink('https://lucasribeiru.github.io/prepara-instrutor/MANUAL_IDENTIDADE_VISUAL.html')"><i class="fa-solid fa-copy"></i> Copiar</button>
+            <button class="btn-card btn-wa" onclick="shareWa('Manual de Identidade Visual Acelera Instrutor', 'https://lucasribeiru.github.io/prepara-instrutor/MANUAL_IDENTIDADE_VISUAL.html')"><i class="fa-brands fa-whatsapp"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Architecture Specs -->
+      <div class="link-card">
+        <div>
+          <div class="link-icon icon-purple"><i class="fa-solid fa-sitemap"></i></div>
+          <h3 class="link-card-title">4. Documento de Arquitetura</h3>
+          <p class="link-card-desc">Detalhamento técnico da arquitetura frontend, diagramas visuais em Mermaid e padrões de estado.</p>
+        </div>
+        <div>
+          <div class="link-url-box">https://github.com/lucasribeiru/prepara-instrutor/blob/main/ARCHITECTURE.md</div>
+          <div class="card-actions">
+            <a href="https://github.com/lucasribeiru/prepara-instrutor/blob/main/ARCHITECTURE.md" target="_blank" class="btn-card btn-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir</a>
+            <button class="btn-card btn-copy" onclick="copyLink('https://github.com/lucasribeiru/prepara-instrutor/blob/main/ARCHITECTURE.md')"><i class="fa-solid fa-copy"></i> Copiar</button>
+            <button class="btn-card btn-wa" onclick="shareWa('Documento de Arquitetura Acelera Instrutor', 'https://github.com/lucasribeiru/prepara-instrutor/blob/main/ARCHITECTURE.md')"><i class="fa-brands fa-whatsapp"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Features Specs -->
+      <div class="link-card">
+        <div>
+          <div class="link-icon icon-blue"><i class="fa-solid fa-sliders"></i></div>
+          <h3 class="link-card-title">5. Especificações de Módulos</h3>
+          <p class="link-card-desc">Manual com a matemática do Simulador ROI, formulário de PDF e regras de negócio do WhatsApp.</p>
+        </div>
+        <div>
+          <div class="link-url-box">https://github.com/lucasribeiru/prepara-instrutor/blob/main/FEATURES.md</div>
+          <div class="card-actions">
+            <a href="https://github.com/lucasribeiru/prepara-instrutor/blob/main/FEATURES.md" target="_blank" class="btn-card btn-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir</a>
+            <button class="btn-card btn-copy" onclick="copyLink('https://github.com/lucasribeiru/prepara-instrutor/blob/main/FEATURES.md')"><i class="fa-solid fa-copy"></i> Copiar</button>
+            <button class="btn-card btn-wa" onclick="shareWa('Especificação de Módulos Acelera Instrutor', 'https://github.com/lucasribeiru/prepara-instrutor/blob/main/FEATURES.md')"><i class="fa-brands fa-whatsapp"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Developer Maintenance Guide -->
+      <div class="link-card">
+        <div>
+          <div class="link-icon icon-yellow"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+          <h3 class="link-card-title">6. Guia de Manutenção</h3>
+          <p class="link-card-desc">Manual prático para alteração de telefones, preços de serviços, pacote de entregas e novos deploys.</p>
+        </div>
+        <div>
+          <div class="link-url-box">https://github.com/lucasribeiru/prepara-instrutor/blob/main/GUIA_DE_MANUTENCAO.md</div>
+          <div class="card-actions">
+            <a href="https://github.com/lucasribeiru/prepara-instrutor/blob/main/GUIA_DE_MANUTENCAO.md" target="_blank" class="btn-card btn-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir</a>
+            <button class="btn-card btn-copy" onclick="copyLink('https://github.com/lucasribeiru/prepara-instrutor/blob/main/GUIA_DE_MANUTENCAO.md')"><i class="fa-solid fa-copy"></i> Copiar</button>
+            <button class="btn-card btn-wa" onclick="shareWa('Guia de Manutenção Acelera Instrutor', 'https://github.com/lucasribeiru/prepara-instrutor/blob/main/GUIA_DE_MANUTENCAO.md')"><i class="fa-brands fa-whatsapp"></i></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color: var(--green-bright); margin-right: 0.5rem;"></i>
+    <span id="toastMsg">Link copiado com sucesso!</span>
+  </div>
+
+  <script>
+    function copyLink(url) {
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('Link copiado para a área de transferência!');
+      }).catch(err => {
+        console.error('Erro ao copiar', err);
+      });
+    }
+
+    function shareWa(title, url) {
+      const text = encodeURIComponent(`Confira ${title}:\n${url}`);
+      window.open(`https://wa.me/?text=${text}`, '_blank');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.textContent = msg;
+      toast.classList.add('active');
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
