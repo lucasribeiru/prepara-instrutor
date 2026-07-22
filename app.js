@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRoiCalculator();
   initProposalBuilder();
   initPackageModals();
+  initFaqAccordion();
 });
 
 
@@ -392,6 +393,35 @@ function initPackageModals() {
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
+  });
+}
+
+/* 6. FAQ Accordion */
+function initFaqAccordion() {
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+      const faqItem = question.parentElement;
+      const faqAnswer = question.nextElementSibling;
+      
+      // Close other active FAQ items if any
+      document.querySelectorAll('.faq-item').forEach(item => {
+        if (item !== faqItem && item.classList.contains('active')) {
+          item.classList.remove('active');
+          item.querySelector('.faq-answer').style.maxHeight = null;
+        }
+      });
+      
+      // Toggle active class on current FAQ item
+      faqItem.classList.toggle('active');
+      
+      if (faqItem.classList.contains('active')) {
+        faqAnswer.style.maxHeight = faqAnswer.scrollHeight + "px";
+      } else {
+        faqAnswer.style.maxHeight = null;
+      }
+    });
   });
 }
 
