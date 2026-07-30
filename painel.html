@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Controle | Acelera Instrutor</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="assets/logo.jpg">
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard-body">
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color: var(--green-bright); margin-right: 0.5rem;"></i>
+    <span id="toastMsg">Ação realizada com sucesso!</span>
+  </div>
+
+  <!-- Main Container -->
+  <div id="dashboardApp">
+
+    <!-- 1. TELA DE SELEÇÃO DE PERFIL / LOGIN SIMULADO -->
+    <div id="loginScreen" class="dashboard-login-container">
+      <div class="login-card">
+        <div class="login-header">
+          <img src="assets/logo.jpg" alt="Acelera Instrutor" class="login-logo">
+          <h2>Painel Acelera Instrutor</h2>
+          <p>Selecione seu perfil de acesso ou insira os dados para continuar</p>
+        </div>
+        
+        <div class="login-tabs">
+          <button class="login-tab-btn active" id="btnTabAdmin" onclick="switchLoginTab('admin')">
+            <i class="fa-solid fa-user-tie"></i> Administrador
+          </button>
+          <button class="login-tab-btn" id="btnTabClient" onclick="switchLoginTab('client')">
+            <i class="fa-solid fa-id-card-clip"></i> Espaço do Cliente
+          </button>
+        </div>
+
+        <!-- Formulário Admin -->
+        <div id="loginAdminForm" class="login-tab-content active">
+          <p class="login-info-text">Acesse o gerenciamento geral da aceleradora, cadastre novos instrutores e controle o andamento dos projetos.</p>
+          <button onclick="loginAsAdmin()" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> Acessar Administração
+          </button>
+        </div>
+
+        <!-- Formulário Cliente -->
+        <div id="loginClientForm" class="login-tab-content">
+          <p class="login-info-text">Selecione um dos clientes cadastrados para simular a Área do Cliente (ou digite o telefone cadastrado):</p>
+          
+          <div style="margin-bottom: 1.25rem;">
+            <label class="form-label" for="loginClientSelect">Escolha um Instrutor:</label>
+            <select id="loginClientSelect" class="form-input">
+              <!-- Preenchido dinamicamente via JS -->
+            </select>
+          </div>
+          
+          <div style="margin-bottom: 1.5rem; text-align: center; color: var(--text-light); font-size: 0.8rem;">
+            <span>— OU —</span>
+          </div>
+
+          <div style="margin-bottom: 1.5rem;">
+            <label class="form-label" for="loginClientPhone">Telefone Cadastrado (Apenas números):</label>
+            <input type="text" id="loginClientPhone" class="form-input" placeholder="Ex: 96981461881">
+          </div>
+
+          <button onclick="loginAsClient()" class="btn-whatsapp" style="width: 100%; justify-content: center;">
+            <i class="fa-solid fa-user-check"></i> Entrar na Área do Cliente
+          </button>
+        </div>
+
+        <div class="login-footer">
+          <a href="index.html" class="back-home-link"><i class="fa-solid fa-chevron-left"></i> Voltar ao site principal</a>
+          <button id="themeToggle" class="btn-theme-toggle" aria-label="Alternar Tema" style="margin-left: auto;">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PAINEL DO ADMINISTRADOR -->
+    <div id="adminPanel" class="dashboard-layout" style="display: none;">
+      
+      <!-- Sidebar -->
+      <aside class="dashboard-sidebar">
+        <div class="sidebar-brand">
+          <img src="assets/logo.jpg" alt="Logo" class="sidebar-logo">
+          <div>
+            <h3>Acelera</h3>
+            <span>Consultoria & B2B</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-menu">
+          <button class="sidebar-link active" id="btnAdminViewClients" onclick="switchAdminView('clients')">
+            <i class="fa-solid fa-users"></i> Gerenciar Clientes
+          </button>
+          <button class="sidebar-link" id="btnAdminViewRegister" onclick="switchAdminView('register')">
+            <i class="fa-solid fa-user-plus"></i> Novo Cadastro
+          </button>
+          <a href="index.html" class="sidebar-link">
+            <i class="fa-solid fa-house"></i> Ir para o Site
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="btn-logout" onclick="logout()">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair do Painel
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="dashboard-main">
+        <header class="dashboard-header">
+          <div class="header-welcome">
+            <h2>Painel Administrativo</h2>
+            <p>Gerencie os instrutores autônomos acelerados e crie novos espaços.</p>
+          </div>
+
+          <div class="header-actions">
+            <button id="adminThemeToggle" class="btn-theme-toggle" aria-label="Alternar Tema" title="Alternar Tema">
+              <i class="fa-solid fa-moon"></i>
+            </button>
+            <span class="user-badge"><i class="fa-solid fa-user-tie"></i> Admin Consultoria</span>
+          </div>
+        </header>
+
+        <!-- ABA 1: GERENCIAR CLIENTES -->
+        <section id="adminViewClients" class="admin-view active">
+          
+          <!-- Metricas KPI -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-icon icon-blue"><i class="fa-solid fa-users"></i></div>
+              <div class="kpi-data">
+                <span class="kpi-title">Clientes Cadastrados</span>
+                <span id="kpiTotalClients" class="kpi-value">0</span>
+              </div>
+            </div>
+            
+            <div class="kpi-card">
+              <div class="kpi-icon icon-purple"><i class="fa-solid fa-rocket"></i></div>
+              <div class="kpi-data">
+                <span class="kpi-title">Pacotes Premium 360°</span>
+                <span id="kpiEliteClients" class="kpi-value">0</span>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon icon-green"><i class="fa-solid fa-circle-check"></i></div>
+              <div class="kpi-data">
+                <span class="kpi-title">Aprovados Detran</span>
+                <span id="kpiApprovedClients" class="kpi-value">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabela e Listagem -->
+          <div class="table-container">
+            <div class="table-header-tools">
+              <h3>Filtros & Busca</h3>
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <input type="text" id="clientSearch" class="form-input search-input" placeholder="Buscar por nome ou cidade..." onkeyup="filterClientsList()">
+                <select id="clientFilterStatus" class="form-input select-filter" onchange="filterClientsList()">
+                  <option value="all">Todos os Status (Detran)</option>
+                  <option value="Pendente">Pendente</option>
+                  <option value="Em Andamento">Em Andamento</option>
+                  <option value="Aprovado">Aprovado</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="responsive-table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Instrutor</th>
+                    <th>Cidade / UF</th>
+                    <th>Pacote</th>
+                    <th>Credenciamento</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="clientsTableBody">
+                  <!-- Injetado dinamicamente -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABA 2: NOVO CADASTRO -->
+        <section id="adminViewRegister" class="admin-view">
+          <div class="form-card">
+            <h3>Cadastrar Novo Cliente (Instrutor)</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Preencha a ficha do profissional para criar o espaço personalizado.</p>
+            
+            <form id="newClientForm" onsubmit="handleNewClientSubmit(event)">
+              <div class="form-grid">
+                
+                <div class="form-group">
+                  <label class="form-label" for="regName">Nome Completo *</label>
+                  <input type="text" id="regName" class="form-input" required placeholder="Ex: Rodrigo Silva">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="regPhone">WhatsApp / Telefone (com DDD, apenas números) *</label>
+                  <input type="text" id="regPhone" class="form-input" required placeholder="Ex: 96981461881">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="regCity">Cidade / UF *</label>
+                  <input type="text" id="regCity" class="form-input" required placeholder="Ex: Macapá / AP">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="regPackage">Pacote Contratado *</label>
+                  <select id="regPackage" class="form-input" required>
+                    <option value="burocracia">Fase 1: Estruturação e Licenciamento (Detran)</option>
+                    <option value="digital">Fase 2: Máquina de Captação (Instagram/Ads)</option>
+                    <option value="vendas">Fase 3: Alta Conversão (WhatsApp/Scripts)</option>
+                    <option value="elite">Pacote Elite: Aceleração 360° (Completo)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="regStatus">Status do Credenciamento Detran *</label>
+                  <select id="regStatus" class="form-input" required>
+                    <option value="Pendente">Pendente</option>
+                    <option value="Em Andamento">Em Andamento (Análise Técnica)</option>
+                    <option value="Aprovado">Aprovado (Credenciado e Liberado)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="regDrive">Link da Pasta de Arquivos (Google Drive/Dropbox)</label>
+                  <input type="url" id="regDrive" class="form-input" placeholder="https://drive.google.com/drive/...">
+                </div>
+
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="btn-secondary" onclick="switchAdminView('clients')">Cancelar</button>
+                <button type="submit" class="btn-primary"><i class="fa-solid fa-floppy-disk"></i> Gravar Cadastro</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- 3. ESPAÇO DO CLIENTE (INSTRUTOR INDIVIDUAL) -->
+    <div id="clientSpace" class="dashboard-layout" style="display: none;">
+      
+      <!-- Sidebar do Cliente -->
+      <aside class="dashboard-sidebar">
+        <div class="sidebar-brand">
+          <img src="assets/logo.jpg" alt="Logo" class="sidebar-logo">
+          <div>
+            <h3 id="clientSpaceBrandName">Instrutor</h3>
+            <span>Parceiro Acelera</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-menu">
+          <button class="sidebar-link active" id="btnClientViewJourney" onclick="switchClientView('journey')">
+            <i class="fa-solid fa-map-location-dot"></i> Minha Jornada
+          </button>
+          <button class="sidebar-link" id="btnClientViewLeads" onclick="switchClientView('leads')">
+            <i class="fa-solid fa-address-book"></i> CRM: Meus Alunos
+          </button>
+          <button class="sidebar-link" id="btnClientViewDownloads" onclick="switchClientView('downloads')">
+            <i class="fa-solid fa-cloud-arrow-down"></i> Central de Arquivos
+          </button>
+          <button class="sidebar-link" id="btnClientViewGoals" onclick="switchClientView('goals')">
+            <i class="fa-solid fa-chart-pie"></i> Simulador de Metas
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="btn-logout" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Voltar ao Início
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content do Cliente -->
+      <main class="dashboard-main">
+        <header class="dashboard-header">
+          <div class="header-welcome">
+            <h2 id="clientSpaceWelcome">Olá, Instrutor!</h2>
+            <p>Seja bem-vindo à sua central estratégica de crescimento de faturamento.</p>
+          </div>
+
+          <div class="header-actions">
+            <button id="clientThemeToggle" class="btn-theme-toggle" aria-label="Alternar Tema" title="Alternar Tema">
+              <i class="fa-solid fa-moon"></i>
+            </button>
+            <a href="https://wa.me/5596981461881?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20meu%20projeto." target="_blank" class="btn-whatsapp" style="padding: 0.6rem 1rem; font-size: 0.85rem;">
+              <i class="fa-brands fa-whatsapp"></i> Falar com Gerente
+            </a>
+          </div>
+        </header>
+
+        <!-- ABA CLIENTE 1: JORNADA / ONBOARDING -->
+        <section id="clientViewJourney" class="client-view active">
+          <div class="card-glass-dashboard" style="margin-bottom: 2rem;">
+            <div class="journey-header-flex">
+              <div>
+                <span class="badge-brand badge-blue" id="clientActivePkgBadge">Pacote Especial</span>
+                <h3 style="margin-top: 0.5rem; font-size: 1.5rem;">Status da sua Aceleração</h3>
+              </div>
+              <div class="status-indicator">
+                <span>Credenciamento Detran:</span>
+                <span id="clientDetranStatusBadge" class="badge-status-lg text-yellow">Análise</span>
+              </div>
+            </div>
+
+            <!-- Barra de Progresso -->
+            <div class="progress-bar-container" style="margin-top: 2rem;">
+              <div class="progress-bar-labels">
+                <span class="active">Fase 1: Credenciamento</span>
+                <span id="labelStep2">Fase 2: Máquina Pronta</span>
+                <span id="labelStep3">Fase 3: Captação Ativa</span>
+              </div>
+              <div class="progress-bar-track">
+                <div id="clientJourneyProgress" class="progress-bar-fill" style="width: 33%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid Informativa -->
+          <div class="builder-grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div class="form-card" style="margin-bottom: 0;">
+              <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;"><i class="fa-solid fa-circle-info" style="color: var(--blue-bright);"></i> Próximos Passos</h4>
+              <ul class="deliverables-checklist" id="clientNextStepsChecklist">
+                <!-- Checklists serão gerados dinamicamente baseado no pacote -->
+              </ul>
+            </div>
+
+            <div class="form-card" style="margin-bottom: 0;">
+              <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;"><i class="fa-solid fa-folder-open" style="color: var(--yellow-brand);"></i> Pasta Virtual do Projeto</h4>
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                Armazenamos todas as cópias da sua documentação e relatórios mensais de tráfego pago nesta pasta no Google Drive.
+              </p>
+              <a id="clientDriveLinkBtn" href="#" target="_blank" class="btn-primary" style="width: 100%; justify-content: center;">
+                <i class="fa-brands fa-google-drive"></i> Acessar Pasta de Documentos
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABA CLIENTE 2: CRM MEUS ALUNOS (LEADS) -->
+        <section id="clientViewLeads" class="client-view">
+          <div class="crm-header">
+            <div>
+              <h3>CRM de Captação e Conversão</h3>
+              <p>Cadastre e controle os alunos que entram em contato com você pelo Instagram ou WhatsApp.</p>
+            </div>
+            <button class="btn-primary" onclick="openNewLeadModal()"><i class="fa-solid fa-plus"></i> Novo Aluno (Lead)</button>
+          </div>
+
+          <!-- Kanban Board -->
+          <div class="kanban-board">
+            <!-- Coluna 1 -->
+            <div class="kanban-column" id="col-novo">
+              <div class="kanban-column-header">
+                <span>Contato Novo</span>
+                <span class="count-badge" id="count-novo">0</span>
+              </div>
+              <div class="kanban-cards-area" id="area-novo">
+                <!-- Leads dinâmicos -->
+              </div>
+            </div>
+
+            <!-- Coluna 2 -->
+            <div class="kanban-column" id="col-aula">
+              <div class="kanban-column-header">
+                <span>Aula Experimental</span>
+                <span class="count-badge" id="count-aula">0</span>
+              </div>
+              <div class="kanban-cards-area" id="area-aula">
+                <!-- Leads dinâmicos -->
+              </div>
+            </div>
+
+            <!-- Coluna 3 -->
+            <div class="kanban-column" id="col-fechado">
+              <div class="kanban-column-header">
+                <span>Matriculado</span>
+                <span class="count-badge" id="count-fechado">0</span>
+              </div>
+              <div class="kanban-cards-area" id="area-fechado">
+                <!-- Leads dinâmicos -->
+              </div>
+            </div>
+
+            <!-- Coluna 4 -->
+            <div class="kanban-column" id="col-perdido">
+              <div class="kanban-column-header">
+                <span>Perdido</span>
+                <span class="count-badge" id="count-perdido">0</span>
+              </div>
+              <div class="kanban-cards-area" id="area-perdido">
+                <!-- Leads dinâmicos -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABA CLIENTE 3: CENTRAL DE DOWNLOADS -->
+        <section id="clientViewDownloads" class="client-view">
+          <h3 style="margin-bottom: 0.5rem;">Sua Central de Arquivos</h3>
+          <p style="color: var(--text-muted); margin-bottom: 2rem;">Acesse e faça download instantâneo de todas as artes, modelos e materiais inclusos no seu pacote.</p>
+
+          <div class="services-grid" id="clientDownloadsGrid">
+            <!-- Cards de arquivos serão inseridos com base no pacote contratado -->
+          </div>
+        </section>
+
+        <!-- ABA CLIENTE 4: SIMULADOR DE METAS -->
+        <section id="clientViewGoals" class="client-view">
+          <div class="calculator-box" style="background: var(--navy-dark); color: #FFFFFF; border-radius: var(--radius-lg); padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;">
+            <div>
+              <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #FFFFFF;"><i class="fa-solid fa-calculator" style="color: var(--yellow-brand);"></i> Planejamento de Ganhos</h3>
+              <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 2rem;">Configure suas metas abaixo para calcular sua previsão financeira real como autônomo.</p>
+              
+              <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: rgba(255,255,255,0.6);">Quantas aulas práticas você planeja dar por dia?</label>
+                <input type="range" id="goalHours" class="range-input" min="2" max="10" step="1" value="6">
+                <span id="goalHoursVal" style="font-weight: 800; color: var(--yellow-brand); font-size: 1.1rem; display: block; margin-top: 0.35rem;">6 aulas por dia</span>
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: rgba(255,255,255,0.6);">Qual o valor médio cobrado por aula?</label>
+                <input type="range" id="goalClassRate" class="range-input" min="50" max="150" step="5" value="100">
+                <span id="goalClassRateVal" style="font-weight: 800; color: var(--green-bright); font-size: 1.1rem; display: block; margin-top: 0.35rem;">R$ 100,00 por aula</span>
+              </div>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); padding: 2rem; border-radius: var(--radius-md); text-align: center; display: flex; flex-direction: column; justify-content: center;">
+              <div>
+                <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: rgba(255,255,255,0.6);">Sua Meta de Faturamento Mensal:</span>
+                <div id="goalTotalVal" style="font-size: 3rem; font-weight: 900; color: var(--green-bright); margin: 0.75rem 0;">R$ 12.000,00</div>
+              </div>
+
+              <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); padding: 1rem; border-radius: var(--radius-sm); margin-top: 1.5rem; font-size: 0.825rem; color: #E2E8F0; text-align: left; line-height: 1.5;">
+                <i class="fa-solid fa-lightbulb" style="color: var(--yellow-bright); font-size: 1.1rem; margin-right: 0.4rem;"></i>
+                Para alcançar o faturamento mensal de <strong id="goalTotalSummaryText">R$ 12.000,00</strong>, você precisará fechar em média <strong id="goalRequiredStudents">12 novos pacotes</strong> de 10 aulas por mês (considerando que cada aluno faça o pacote padrão).
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- MODAL DE NOVO LEAD (CRM) -->
+    <div id="newLeadModal" class="modal-overlay">
+      <div class="modal-card" style="max-width: 480px;">
+        <div class="modal-header">
+          <h3 class="modal-title"><i class="fa-solid fa-user-plus" style="color: var(--blue-brand); margin-right: 0.5rem;"></i> Cadastrar Novo Aluno</h3>
+          <button onclick="closeNewLeadModal()" class="modal-close-btn" title="Fechar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="newLeadForm" onsubmit="handleNewLeadSubmit(event)">
+            <div style="margin-bottom: 1.25rem;">
+              <label class="form-label" for="leadName">Nome do Aluno *</label>
+              <input type="text" id="leadName" class="form-input" required placeholder="Ex: Maria das Dores">
+            </div>
+            
+            <div style="margin-bottom: 1.25rem;">
+              <label class="form-label" for="leadPhone">Telefone / WhatsApp *</label>
+              <input type="text" id="leadPhone" class="form-input" required placeholder="Ex: 96999999999">
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <label class="form-label" for="leadStatus">Fase da Venda *</label>
+              <select id="leadStatus" class="form-input" required>
+                <option value="novo">Contato Novo (Aguardando contato)</option>
+                <option value="aula">Aula Experimental Agendada</option>
+                <option value="fechado">Matriculado (Pacote Fechado)</option>
+                <option value="perdido">Perdido (Não fechou)</option>
+              </select>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <label class="form-label" for="leadNotes">Observações</label>
+              <textarea id="leadNotes" class="form-input" style="height: 80px; resize: none;" placeholder="Ex: Tem medo de dirigir em ladeiras, quer começar na próxima segunda."></textarea>
+            </div>
+
+            <div class="form-actions" style="margin-top: 0; padding-top: 0; border: none;">
+              <button type="button" class="btn-secondary" onclick="closeNewLeadModal()">Cancelar</button>
+              <button type="submit" class="btn-primary">Adicionar Lead</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Javascript -->
+  <script src="painel.js"></script>
+</body>
+</html>
