@@ -326,6 +326,9 @@ function renderClientsTable() {
             <button class="btn-action-small btn-action-copy" onclick="copyClientLink('${client.id}')" title="Copiar Link de Acesso Exclusivo">
               <i class="fa-solid fa-copy"></i> Copiar Link
             </button>
+            <button class="btn-action-small btn-action-copy" onclick="openEditClientModal('${client.id}')" title="Editar Dados de Cadastro">
+              <i class="fa-solid fa-pen-to-square"></i> Editar
+            </button>
             <button class="btn-action-small btn-action-delete" onclick="deleteClient('${client.id}')" title="Excluir Cliente">
               <i class="fa-solid fa-trash"></i>
             </button>
@@ -405,6 +408,75 @@ function viewClientSpace(id) {
   sessionStorage.setItem('current_user_role', 'client');
   sessionStorage.setItem('current_client_id', id);
   showClientSpace(id);
+}
+
+function openEditClientModal(id) {
+  const clients = getClients();
+  const client = clients.find(c => c.id === id);
+  if (!client) {
+    showToast('Cliente não encontrado!', 'error');
+    return;
+  }
+  
+  document.getElementById('editClientId').value = client.id;
+  document.getElementById('editName').value = client.name;
+  document.getElementById('editPhone').value = client.phone;
+  document.getElementById('editCity').value = client.city;
+  document.getElementById('editPackage').value = client.package;
+  document.getElementById('editStatus').value = client.status;
+  document.getElementById('editDrive').value = client.driveLink || '';
+  
+  const modal = document.getElementById('editClientModal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeEditClientModal() {
+  const modal = document.getElementById('editClientModal');
+  if (modal) modal.classList.remove('active');
+  document.getElementById('editClientForm').reset();
+}
+
+function handleEditClientSubmit(e) {
+  e.preventDefault();
+  
+  const id = document.getElementById('editClientId').value;
+  const name = document.getElementById('editName').value.trim();
+  const phone = document.getElementById('editPhone').value.replace(/\D/g, '');
+  const city = document.getElementById('editCity').value.trim();
+  const packageVal = document.getElementById('editPackage').value;
+  const status = document.getElementById('editStatus').value;
+  const driveLink = document.getElementById('editDrive').value.trim() || 'https://drive.google.com';
+  
+  if (!name || !phone || !city) {
+    showToast('Por favor, preencha todos os campos obrigatórios.', 'error');
+    return;
+  }
+  
+  let clients = getClients();
+  
+  // Verifica se o telefone já existe em outro cliente
+  if (clients.some(c => c.phone === phone && c.id !== id)) {
+    showToast('Outro cliente com este telefone já está cadastrado!', 'error');
+    return;
+  }
+  
+  const clientIndex = clients.findIndex(c => c.id === id);
+  if (clientIndex !== -1) {
+    clients[clientIndex].name = name;
+    clients[clientIndex].phone = phone;
+    clients[clientIndex].city = city;
+    clients[clientIndex].package = packageVal;
+    clients[clientIndex].status = status;
+    clients[clientIndex].driveLink = driveLink;
+    
+    saveClients(clients);
+    renderClientsKPIs();
+    renderClientsTable();
+    closeEditClientModal();
+    showToast('Dados do instrutor atualizados com sucesso!');
+  } else {
+    showToast('Erro ao atualizar dados: instrutor não encontrado.', 'error');
+  }
 }
 
 // 7. CÓDIGO DA INTERFACE DO CLIENTE (INSTRUTOR)

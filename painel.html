@@ -513,6 +513,73 @@
       </div>
     </div>
 
+    <!-- MODAL DE EDITAR CLIENTE (CADASTRO E LOGIN) -->
+    <div id="editClientModal" class="modal-overlay">
+      <div class="modal-card" style="max-width: 580px;">
+        <div class="modal-header">
+          <h3 class="modal-title"><i class="fa-solid fa-user-gear" style="color: var(--blue-brand); margin-right: 0.5rem;"></i> Editar Dados do Instrutor</h3>
+          <button onclick="closeEditClientModal()" class="modal-close-btn" title="Fechar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="editClientForm" onsubmit="handleEditClientSubmit(event)">
+            <input type="hidden" id="editClientId">
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+              <div>
+                <label class="form-label" for="editName">Nome Completo *</label>
+                <input type="text" id="editName" class="form-input" required>
+              </div>
+              
+              <div>
+                <label class="form-label" for="editPhone">WhatsApp / Login (apenas números) *</label>
+                <input type="text" id="editPhone" class="form-input" required>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+              <div>
+                <label class="form-label" for="editCity">Cidade / UF *</label>
+                <input type="text" id="editCity" class="form-input" required>
+              </div>
+
+              <div>
+                <label class="form-label" for="editPackage">Pacote Contratado *</label>
+                <select id="editPackage" class="form-input" required>
+                  <option value="burocracia">Fase 1: Estruturação e Licenciamento (Detran)</option>
+                  <option value="digital">Fase 2: Máquina de Captação (Instagram/Ads)</option>
+                  <option value="vendas">Fase 3: Alta Conversão (WhatsApp/Scripts)</option>
+                  <option value="elite">Pacote Elite: Aceleração 360° (Completo)</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+              <div>
+                <label class="form-label" for="editStatus">Status do Credenciamento Detran *</label>
+                <select id="editStatus" class="form-input" required>
+                  <option value="Pendente">Pendente</option>
+                  <option value="Em Andamento">Em Andamento</option>
+                  <option value="Aprovado">Aprovado</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="form-label" for="editDrive">Google Drive (Pasta de Arquivos)</label>
+                <input type="url" id="editDrive" class="form-input">
+              </div>
+            </div>
+
+            <div class="form-actions" style="margin-top: 1rem; padding-top: 1rem;">
+              <button type="button" class="btn-secondary" onclick="closeEditClientModal()">Cancelar</button>
+              <button type="submit" class="btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Alterações</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- Javascript -->
