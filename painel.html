@@ -72,13 +72,22 @@
             <span>— OU —</span>
           </div>
 
-          <div style="margin-bottom: 1.5rem;">
+          <div style="margin-bottom: 1.25rem;">
             <label class="form-label" for="loginClientPhone">Telefone Cadastrado (Apenas números):</label>
             <input type="text" id="loginClientPhone" class="form-input" placeholder="Ex: 96981461881">
           </div>
 
-          <button onclick="loginAsClient()" class="btn-whatsapp" style="width: 100%; justify-content: center;">
+          <div style="margin-bottom: 1.5rem;">
+            <label class="form-label" for="loginClientPassword">Senha de Acesso:</label>
+            <input type="password" id="loginClientPassword" class="form-input" placeholder="Digite sua senha">
+          </div>
+
+          <button onclick="loginAsClient()" class="btn-whatsapp" style="width: 100%; justify-content: center; margin-bottom: 1rem;">
             <i class="fa-solid fa-user-check"></i> Entrar na Área do Cliente
+          </button>
+
+          <button onclick="openRegisterModal()" class="btn-secondary" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.6rem;">
+            <i class="fa-solid fa-user-plus"></i> Sou Instrutor e Quero me Cadastrar
           </button>
         </div>
 
@@ -289,6 +298,9 @@
           <button class="sidebar-link" id="btnClientViewGoals" onclick="switchClientView('goals')">
             <i class="fa-solid fa-chart-pie"></i> Simulador de Metas
           </button>
+          <button class="sidebar-link" id="btnClientViewProfile" onclick="switchClientView('profile')">
+            <i class="fa-solid fa-user-pen"></i> Meu Perfil (Currículo)
+          </button>
         </nav>
 
         <div class="sidebar-footer">
@@ -465,6 +477,80 @@
             </div>
           </div>
         </section>
+
+        <!-- ABA CLIENTE 5: MEU PERFIL / CURRÍCULO -->
+        <section id="clientViewProfile" class="client-view">
+          <div class="form-card">
+            <h3>Meu Perfil Público (Currículo)</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Preencha seus dados de currículo para aparecer na página pública de busca de alunos.</p>
+            
+            <form id="clientProfileForm" onsubmit="handleClientProfileSubmit(event)">
+              <div class="form-grid">
+                
+                <div class="form-group">
+                  <label class="form-label" for="profileName">Nome Completo *</label>
+                  <input type="text" id="profileName" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="profilePhone">Telefone / WhatsApp (apenas números) *</label>
+                  <input type="text" id="profilePhone" class="form-input" required readonly style="background: var(--bg-primary); cursor: not-allowed;" title="O telefone é seu login e não pode ser editado diretamente. Contate o suporte se precisar alterar.">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="profileCity">Cidade / UF *</label>
+                  <input type="text" id="profileCity" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="profilePhoto">URL da Foto de Perfil</label>
+                  <input type="text" id="profilePhoto" class="form-input" placeholder="Ex: https://linkdafoto.com/foto.jpg">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="profileRate">Preço Médio da Aula (R$) *</label>
+                  <input type="number" id="profileRate" class="form-input" required min="50" max="150" step="5">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="profilePassword">Alterar Senha de Acesso</label>
+                  <input type="password" id="profilePassword" class="form-input" placeholder="Digite uma nova senha se quiser alterar">
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="form-label" for="profileBio">Biografia / Apresentação de Vendas *</label>
+                  <textarea id="profileBio" class="form-input" required style="height: 100px; resize: none;" placeholder="Descreva sua experiência, didática e carro. Isso convencerá os alunos no catálogo..."></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="form-label">Minhas Especialidades * (Selecione ao menos 1)</label>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 500;">
+                      <input type="checkbox" name="profileSpecs" value="Medo de Dirigir" class="service-checkbox" style="width:16px; height:16px; accent-color: var(--blue-brand);"> Treinamento para Habilitados / Medo de Dirigir
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 500;">
+                      <input type="checkbox" name="profileSpecs" value="Preparação para Exame" class="service-checkbox" style="width:16px; height:16px; accent-color: var(--blue-brand);"> Preparação para Exame Detran
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 500;">
+                      <input type="checkbox" name="profileSpecs" value="Baliza Fácil" class="service-checkbox" style="width:16px; height:16px; accent-color: var(--blue-brand);"> Baliza Fácil / Vagas
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 500;">
+                      <input type="checkbox" name="profileSpecs" value="Aulas Noturnas" class="service-checkbox" style="width:16px; height:16px; accent-color: var(--blue-brand);"> Aulas Noturnas
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 500;">
+                      <input type="checkbox" name="profileSpecs" value="Reciclagem de CNH" class="service-checkbox" style="width:16px; height:16px; accent-color: var(--blue-brand);"> Reciclagem de CNH
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-primary"><i class="fa-solid fa-circle-check"></i> Salvar Currículo</button>
+              </div>
+            </form>
+          </div>
+        </section>
       </main>
     </div>
 
@@ -574,6 +660,51 @@
             <div class="form-actions" style="margin-top: 1rem; padding-top: 1rem;">
               <button type="button" class="btn-secondary" onclick="closeEditClientModal()">Cancelar</button>
               <button type="submit" class="btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Alterações</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE AUTO-CADASTRO DO INSTRUTOR -->
+    <div id="registerModal" class="modal-overlay">
+      <div class="modal-card" style="max-width: 480px;">
+        <div class="modal-header">
+          <h3 class="modal-title"><i class="fa-solid fa-user-plus" style="color: var(--blue-brand); margin-right: 0.5rem;"></i> Cadastrar Novo Instrutor</h3>
+          <button onclick="closeRegisterModal()" class="modal-close-btn" title="Fechar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="registerForm" onsubmit="handleAutoRegister(event)">
+            <div style="margin-bottom: 1.25rem;">
+              <label class="form-label" for="signUpName">Nome Completo *</label>
+              <input type="text" id="signUpName" class="form-input" required placeholder="Ex: Lucas Ribeiro">
+            </div>
+            
+            <div style="margin-bottom: 1.25rem;">
+              <label class="form-label" for="signUpPhone">WhatsApp / Login (apenas números) *</label>
+              <input type="text" id="signUpPhone" class="form-input" required placeholder="Ex: 96981461881">
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <label class="form-label" for="signUpCity">Cidade / UF *</label>
+              <input type="text" id="signUpCity" class="form-input" required placeholder="Ex: Macapá / AP">
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <label class="form-label" for="signUpPassword">Senha de Acesso *</label>
+              <input type="password" id="signUpPassword" class="form-input" required placeholder="Crie uma senha de acesso">
+            </div>
+
+            <div style="background: var(--blue-light); border: 1px solid var(--border-brand); padding: 0.85rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; font-size: 0.8rem; color: var(--text-muted);">
+              <i class="fa-solid fa-circle-info" style="color: var(--blue-bright); margin-right: 4px;"></i>
+              Seu cadastro iniciará no **Plano de Demonstração (Fase 1: Detran)**. Você poderá configurar seu perfil público (currículo) logo após realizar o primeiro login!
+            </div>
+
+            <div class="form-actions" style="margin-top: 0; padding-top: 0; border: none;">
+              <button type="button" class="btn-secondary" onclick="closeRegisterModal()">Cancelar</button>
+              <button type="submit" class="btn-primary">Criar Minha Conta</button>
             </div>
           </form>
         </div>

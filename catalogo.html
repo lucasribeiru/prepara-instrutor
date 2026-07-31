@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Instrutores | Acelera Instrutor</title>
+  <meta name="description" content="Encontre e contrate os melhores instrutores de trânsito autônomos credenciados da sua região. Perca o medo de dirigir e passe no exame prático.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="assets/logo.jpg">
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Site Header & Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="brand-logo-container" aria-label="Acelera Instrutor Home">
+        <img src="assets/logo.jpg" alt="Logo Acelera Instrutor" class="brand-logo-img">
+      </a>
+
+      <nav aria-label="Navegação Principal">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Página Inicial</a></li>
+          <li><a href="catalogo.html" class="nav-link active">Buscar Instrutores</a></li>
+          <li><a href="index.html#calculadora" class="nav-link">Simulador de Ganhos</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="btn-theme-toggle" aria-label="Alternar Tema Claro/Escuro" title="Alternar Tema">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="painel.html" class="btn-whatsapp">
+          <i class="fa-solid fa-user-plus" style="font-size: 1.1rem;"></i>
+          <span>Entrar / Cadastrar</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Search Section -->
+  <section class="hero-section" style="padding: 3.5rem 0; text-align: center;">
+    <div class="container" style="max-width: 800px;">
+      <span class="badge-brand" style="margin-bottom: 1rem;">
+        <i class="fa-solid fa-graduation-cap"></i> Encontre seu Instrutor
+      </span>
+      <h1 class="hero-title" style="font-size: 2.5rem; margin-bottom: 1rem;">
+        Escolha o <span class="text-gradient-blue">Profissional Ideal</span> perto de você
+      </h1>
+      <p class="hero-subtitle" style="margin-bottom: 2rem;">
+        Todos os instrutores listados são profissionais autônomos acelerados e credenciados, comprometidos com aulas humanizadas e focadas no seu sucesso.
+      </p>
+
+      <!-- Search Box Card -->
+      <div class="card-glass-dashboard" style="padding: 1.5rem; border-radius: var(--radius-md); text-align: left;">
+        <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1rem; margin-bottom: 1rem;">
+          <div style="position: relative;">
+            <input type="text" id="catalogSearch" class="form-input" placeholder="Buscar por nome, cidade ou estado (ex: Macapá)..." onkeyup="filterCatalog()" style="padding-left: 2.5rem;">
+            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-light);"></i>
+          </div>
+          <div>
+            <select id="catalogSpecialtyFilter" class="form-input" onchange="filterCatalog()">
+              <option value="all">Todas as Especialidades</option>
+              <option value="Medo de Dirigir">Medo de Dirigir / Habilitados</option>
+              <option value="Preparação para Exame">Preparação para Exame Detran</option>
+              <option value="Baliza Fácil">Baliza Fácil / Vagas</option>
+              <option value="Aulas Noturnas">Aulas Noturnas</option>
+              <option value="Reciclagem de CNH">Reciclagem de CNH</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Filtros rápidos:</span>
+          <button class="quick-tag" onclick="setQuickSpecialty('all')">Todos</button>
+          <button class="quick-tag" onclick="setQuickSpecialty('Medo de Dirigir')">Perca o Medo</button>
+          <button class="quick-tag" onclick="setQuickSpecialty('Preparação para Exame')">Foco no Exame</button>
+          <button class="quick-tag" onclick="setQuickSpecialty('Baliza Fácil')">Treino de Baliza</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog Grid Section -->
+  <section class="services-section" style="background: var(--bg-primary); min-height: 400px; padding-top: 2rem;">
+    <div class="container">
+      <div id="catalogGrid" class="services-grid">
+        <!-- Cards de instrutores injetados via JS -->
+      </div>
+      
+      <div id="catalogEmptyMessage" style="display: none; text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+        <i class="fa-solid fa-user-slash" style="font-size: 3rem; margin-bottom: 1rem; color: var(--text-light);"></i>
+        <h3>Nenhum instrutor encontrado para os critérios de busca.</h3>
+        <p style="margin-top: 0.5rem;">Tente buscar por outra cidade ou limpar os filtros de especialidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; margin-bottom: 3.5rem;">
+        <div>
+          <img src="assets/logo.jpg" alt="Acelera Instrutor" style="height: 44px; margin-bottom: 1rem; border-radius: var(--radius-sm);">
+          <p style="font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            A central estratégica (B2B) focada exclusivamente no sucesso e aceleração de Instrutores de Trânsito Autônomos.
+          </p>
+          <p style="font-size: 0.75rem; color: var(--text-muted);">Documento Confidencial | Versão 1.3 | 2026</p>
+        </div>
+
+        <div>
+          <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 1.25rem;">Navegação</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.875rem;">
+            <li><a href="index.html" style="color: var(--text-muted);">Página Inicial</a></li>
+            <li><a href="catalogo.html" style="color: var(--text-muted);">Buscar Instrutores</a></li>
+            <li><a href="painel.html" style="color: var(--yellow-brand); font-weight: 700;"><i class="fa-solid fa-gauge-high"></i> Painel e Área do Cliente</a></li>
+            <li><a href="DOCS.html" style="color: var(--blue-bright); font-weight: 700;"><i class="fa-solid fa-folder-open"></i> Central de Links Web</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 1.25rem;">Serviços</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.875rem;">
+            <li><a href="index.html#fases" style="color: var(--text-muted);">Assessoria Detran</a></li>
+            <li><a href="index.html#fases" style="color: var(--text-muted);">Kit Digital PDF</a></li>
+            <li><a href="index.html#fases" style="color: var(--text-muted);">Social Media & IA</a></li>
+            <li><a href="index.html#fases" style="color: var(--text-muted);">Tráfego Pago Local</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 1.25rem;">Atendimento Direto</h4>
+          <p style="font-size: 0.85rem; margin-bottom: 1rem; color: var(--text-muted);">Fale diretamente com nossa consultoria pelo WhatsApp:</p>
+          <a href="https://wa.me/5596981461881?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Acelera%20Instrutor%20e%20gostaria%20de%20atendimento." target="_blank" class="btn-whatsapp" style="width: 100%; font-size: 0.85rem; padding: 0.7rem;">
+            <i class="fa-brands fa-whatsapp"></i> (96) 98146-1881
+          </a>
+        </div>
+      </div>
+
+      <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 0.8rem;">
+        <p>&copy; 2026 Acelera Instrutor - Inteligência de Dados e Negócios. Todos os direitos reservados.</p>
+        <p><i class="fa-solid fa-lock" style="color: var(--green-bright);"></i> Central B2B para Instrutores Autônomos</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL: CURRÍCULO COMPLETO DO INSTRUTOR -->
+  <div id="cvModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 680px;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <img id="cvModalPhoto" src="assets/logo.jpg" alt="Foto do Instrutor" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--border-color); object-fit: cover;">
+          <div>
+            <h3 id="cvModalName" class="modal-title">Nome do Instrutor</h3>
+            <span id="cvModalLocation" style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;"><i class="fa-solid fa-location-dot" style="color: var(--blue-bright);"></i> Cidade / UF</span>
+          </div>
+        </div>
+        <button onclick="closeCvModal()" class="modal-close-btn" title="Fechar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        
+        <div class="modal-description-box" style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 0.95rem; color: var(--navy-dark); margin-bottom: 0.5rem;"><i class="fa-solid fa-id-card" style="color: var(--blue-brand);"></i> Sobre Mim (Biografia)</h4>
+          <p id="cvModalBio" style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; font-style: italic;">
+            Este instrutor ainda não cadastrou uma biografia de currículo.
+          </p>
+        </div>
+
+        <div style="margin-bottom: 1.5rem; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1.5rem;">
+          <div>
+            <h4 style="font-size: 0.95rem; color: var(--navy-dark); margin-bottom: 0.75rem;"><i class="fa-solid fa-award" style="color: var(--green-brand);"></i> Especialidades e Serviços</h4>
+            <div id="cvModalSpecialties" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+              <!-- Tags injetadas -->
+            </div>
+          </div>
+          <div>
+            <h4 style="font-size: 0.95rem; color: var(--navy-dark); margin-bottom: 0.75rem;"><i class="fa-solid fa-clock" style="color: var(--yellow-brand);"></i> Detalhes das Aulas</h4>
+            <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+              <li><i class="fa-solid fa-circle-check" style="color: var(--green-bright); margin-right: 4px;"></i> <strong>Preço Médio:</strong> <span id="cvModalRate">R$ 100,00</span></li>
+              <li><i class="fa-solid fa-circle-check" style="color: var(--green-bright); margin-right: 4px;"></i> <strong>Duração:</strong> 50 min/aula</li>
+              <li><i class="fa-solid fa-circle-check" style="color: var(--green-bright); margin-right: 4px;"></i> <strong>Carro Próprio:</strong> Sim (Duplo Comando)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Avaliações Mocks de alunos -->
+        <div>
+          <h4 style="font-size: 0.95rem; color: var(--navy-dark); margin-bottom: 0.75rem;"><i class="fa-solid fa-comments" style="color: var(--blue-bright);"></i> Avaliações de Alunos</h4>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="background: var(--bg-primary); padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.25rem;">
+                <strong>Renata Fonseca</strong>
+                <span style="color: var(--yellow-bright);"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">"Excelente instrutor, muito paciente! Tinha muito medo de dirigir e hoje ando por toda a cidade sem preocupações."</p>
+            </div>
+            <div style="background: var(--bg-primary); padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.25rem;">
+                <strong>Thiago M.</strong>
+                <span style="color: var(--yellow-bright);"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">"Com o treino de baliza que fiz passei de primeira no exame do Detran. Didática incrível e objetiva."</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer" style="background: var(--bg-primary);">
+        <button onclick="closeCvModal()" class="btn-secondary" style="padding: 0.65rem 1.25rem; font-size: 0.85rem;">
+          Voltar
+        </button>
+        <a id="cvModalWhatsappBtn" href="#" target="_blank" class="btn-whatsapp" style="padding: 0.65rem 1.5rem; font-size: 0.9rem;">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>Contratar Aulas (WhatsApp)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom JavaScript -->
+  <script src="catalogo.js"></script>
+</body>
+</html>

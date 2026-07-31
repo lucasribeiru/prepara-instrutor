@@ -54,7 +54,12 @@ function initClientsData() {
         package: 'elite',
         status: 'Aprovado',
         driveLink: 'https://drive.google.com',
-        created_at: new Date().toLocaleDateString('pt-BR')
+        created_at: new Date().toLocaleDateString('pt-BR'),
+        password: '123456',
+        bio: 'Mais de 10 anos de experiência credenciada. Especialista em ajudar motoristas habilitados que possuem fobia do trânsito ou inseguranças a alcançarem sua independência completa no volante.',
+        specialties: ['Medo de Dirigir', 'Baliza Fácil'],
+        rate: 120,
+        photo: 'assets/logo.jpg'
       },
       {
         id: '1690000000002',
@@ -64,7 +69,12 @@ function initClientsData() {
         package: 'vendas',
         status: 'Em Andamento',
         driveLink: 'https://drive.google.com',
-        created_at: new Date().toLocaleDateString('pt-BR')
+        created_at: new Date().toLocaleDateString('pt-BR'),
+        password: '123456',
+        bio: 'Didática focada em aprovação rápida e segura. Treinamento prático intensivo simulando o circuito oficial do Detran para garantir que você passe de primeira com tranquilidade.',
+        specialties: ['Preparação para Exame', 'Baliza Fácil'],
+        rate: 100,
+        photo: 'assets/logo.jpg'
       },
       {
         id: '1690000000003',
@@ -74,10 +84,29 @@ function initClientsData() {
         package: 'digital',
         status: 'Pendente',
         driveLink: 'https://drive.google.com',
-        created_at: new Date().toLocaleDateString('pt-BR')
+        created_at: new Date().toLocaleDateString('pt-BR'),
+        password: '123456',
+        bio: 'Aulas ministradas com total paciência, empatia e segurança. Especializada em conduzir novos condutores habilitados no trânsito urbano, balizas e controle em rampas.',
+        specialties: ['Medo de Dirigir', 'Aulas Noturnas'],
+        rate: 110,
+        photo: 'assets/logo.jpg'
       }
     ];
     localStorage.setItem('prepara_clients', JSON.stringify(mockClients));
+  } else {
+    // Garante que todos os clientes existentes tenham uma senha e dados de catálogo válidos
+    let clients = JSON.parse(localStorage.getItem('prepara_clients'));
+    let altered = false;
+    clients.forEach(c => {
+      if (!c.password) { c.password = '123456'; altered = true; }
+      if (c.rate === undefined) { c.rate = 100; altered = true; }
+      if (c.bio === undefined) { c.bio = 'Instrutor credenciado de trânsito focado em aulas personalizadas e humanizadas.'; altered = true; }
+      if (c.specialties === undefined) { c.specialties = ['Medo de Dirigir', 'Baliza Fácil']; altered = true; }
+      if (c.photo === undefined) { c.photo = 'assets/logo.jpg'; altered = true; }
+    });
+    if (altered) {
+      localStorage.setItem('prepara_clients', JSON.stringify(clients));
+    }
   }
   populateClientSelect();
 }
@@ -192,19 +221,17 @@ function loginAsAdmin() {
 function loginAsClient() {
   const select = document.getElementById('loginClientSelect');
   const phoneInput = document.getElementById('loginClientPhone');
+  const passwordInput = document.getElementById('loginClientPassword');
   
-  let targetClientId = '';
+  let targetClient = null;
+  const clients = getClients();
   
   if (select && select.value) {
-    targetClientId = select.value;
+    targetClient = clients.find(c => c.id === select.value);
   } else if (phoneInput && phoneInput.value.trim()) {
     const rawPhone = phoneInput.value.replace(/\D/g, '');
-    const clients = getClients();
-    const match = clients.find(c => c.phone.replace(/\D/g, '') === rawPhone);
-    
-    if (match) {
-      targetClientId = match.id;
-    } else {
+    targetClient = clients.find(c => c.phone.replace(/\D/g, '') === rawPhone);
+    if (!targetClient) {
       showToast('Nenhum instrutor cadastrado com este telefone!', 'error');
       return;
     }
@@ -213,10 +240,92 @@ function loginAsClient() {
     return;
   }
   
+  const password = passwordInput ? passwordInput.value : '';
+  if (!password) {
+    showToast('Por favor, digite sua senha de acesso.', 'error');
+    return;
+  }
+  
+  const storedPassword = targetClient.password || '123456';
+  
+  if (password !== storedPassword) {
+    showToast('Senha de acesso incorreta!', 'error');
+    return;
+  }
+  
   sessionStorage.setItem('current_user_role', 'client');
-  sessionStorage.setItem('current_client_id', targetClientId);
-  showClientSpace(targetClientId);
-  showToast('Bem-vindo ao seu Espaço do Cliente!');
+  sessionStorage.setItem('current_client_id', targetClient.id);
+  
+  if (passwordInput) passwordInput.value = '';
+  
+  showClientSpace(targetClient.id);
+  showToast(`Bem-vindo ao seu Espaço do Cliente, ${targetClient.name}!`);
+}
+
+// Funções do Modal de Auto-Cadastro
+function openRegisterModal() {
+  const modal = document.getElementById('registerModal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeRegisterModal() {
+  const modal = document.getElementById('registerModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.getElementById('registerForm').reset();
+  }
+}
+
+function handleAutoRegister(e) {
+  e.preventDefault();
+  
+  const name = document.getElementById('signUpName').value.trim();
+  const phone = document.getElementById('signUpPhone').value.replace(/\D/g, '');
+  const city = document.getElementById('signUpCity').value.trim();
+  const password = document.getElementById('signUpPassword').value;
+  
+  if (!name || !phone || !city || !password) {
+    showToast('Por favor, preencha todos os campos obrigatórios.', 'error');
+    return;
+  }
+  
+  let clients = getClients();
+  
+  if (clients.some(c => c.phone.replace(/\D/g, '') === phone)) {
+    showToast('Este número de telefone já está cadastrado no sistema!', 'error');
+    return;
+  }
+  
+  const newClient = {
+    id: Date.now().toString(),
+    name: name,
+    phone: phone,
+    city: city,
+    password: password,
+    package: 'burocracia',
+    status: 'Pendente',
+    driveLink: 'https://drive.google.com',
+    created_at: new Date().toLocaleDateString('pt-BR'),
+    bio: 'Olá, sou um instrutor credenciado focado em aulas personalizadas e humanizadas.',
+    specialties: ['Medo de Dirigir'],
+    rate: 100,
+    photo: 'assets/logo.jpg'
+  };
+  
+  clients.push(newClient);
+  saveClients(clients);
+  
+  renderClientsKPIs();
+  renderClientsTable();
+  
+  closeRegisterModal();
+  
+  const loginPhone = document.getElementById('loginClientPhone');
+  const loginPass = document.getElementById('loginClientPassword');
+  if (loginPhone) loginPhone.value = phone;
+  if (loginPass) loginPass.value = password;
+  
+  showToast('Cadastro realizado com sucesso! Faça login para preencher seu perfil.');
 }
 
 function logout() {
@@ -483,7 +592,7 @@ function handleEditClientSubmit(e) {
 let currentClientId = '';
 
 function switchClientView(viewName) {
-  const views = ['journey', 'leads', 'downloads', 'goals'];
+  const views = ['journey', 'leads', 'downloads', 'goals', 'profile'];
   views.forEach(v => {
     const el = document.getElementById(`clientView${v.charAt(0).toUpperCase() + v.slice(1)}`);
     const btn = document.getElementById(`btnClientView${v.charAt(0).toUpperCase() + v.slice(1)}`);
@@ -550,6 +659,21 @@ function loadClientData(id) {
     }
   }
   
+  // Preenche dados de perfil (currículo)
+  document.getElementById('profileName').value = client.name || '';
+  document.getElementById('profilePhone').value = client.phone || '';
+  document.getElementById('profileCity').value = client.city || '';
+  document.getElementById('profilePhoto').value = client.photo || '';
+  document.getElementById('profileRate').value = client.rate || 100;
+  document.getElementById('profileBio').value = client.bio || '';
+  document.getElementById('profilePassword').value = '';
+  
+  const savedSpecs = client.specialties || ['Medo de Dirigir'];
+  const specCheckboxes = document.querySelectorAll('input[name="profileSpecs"]');
+  specCheckboxes.forEach(cb => {
+    cb.checked = savedSpecs.includes(cb.value);
+  });
+  
   // Próximos Passos Checklist
   loadNextSteps(client);
   
@@ -558,6 +682,54 @@ function loadClientData(id) {
   
   // Inicializa o simulador de metas do cliente
   initGoalCalculator();
+}
+
+function handleClientProfileSubmit(e) {
+  e.preventDefault();
+  
+  const id = currentClientId;
+  const name = document.getElementById('profileName').value.trim();
+  const city = document.getElementById('profileCity').value.trim();
+  const photo = document.getElementById('profilePhoto').value.trim() || 'assets/logo.jpg';
+  const rate = parseInt(document.getElementById('profileRate').value);
+  const password = document.getElementById('profilePassword').value;
+  const bio = document.getElementById('profileBio').value.trim();
+  
+  const selectedSpecs = [];
+  const specCheckboxes = document.querySelectorAll('input[name="profileSpecs"]:checked');
+  specCheckboxes.forEach(cb => {
+    selectedSpecs.push(cb.value);
+  });
+  
+  if (selectedSpecs.length === 0) {
+    showToast('Por favor, selecione ao menos uma especialidade para seu currículo.', 'error');
+    return;
+  }
+  
+  let clients = getClients();
+  const clientIndex = clients.findIndex(c => c.id === id);
+  
+  if (clientIndex !== -1) {
+    clients[clientIndex].name = name;
+    clients[clientIndex].city = city;
+    clients[clientIndex].photo = photo;
+    clients[clientIndex].rate = rate;
+    clients[clientIndex].bio = bio;
+    clients[clientIndex].specialties = selectedSpecs;
+    
+    if (password.trim() !== '') {
+      clients[clientIndex].password = password;
+    }
+    
+    saveClients(clients);
+    
+    document.getElementById('clientSpaceWelcome').textContent = `Olá, Instrutor ${name}!`;
+    document.getElementById('clientSpaceBrandName').textContent = name.split(' ')[0];
+    
+    showToast('Perfil de currículo atualizado com sucesso!');
+  } else {
+    showToast('Erro ao salvar perfil: instrutor não encontrado.', 'error');
+  }
 }
 
 function loadNextSteps(client) {
