@@ -823,10 +823,44 @@ function loadDownloads(pkg) {
 }
 
 function triggerMockDownload(fileName) {
-  showToast(`Baixando arquivo: "${fileName}"...`);
+  showToast(`Preparando download de: "${fileName}"...`);
+  
+  const fileContents = {
+    'Modelos de Ofícios Detran': `MODELO DE OFÍCIO PARA SOLICITAÇÃO DE CREDENCIAMENTO - DETRAN\n\nAo Senhor Diretor do Departamento Estadual de Trânsito (DETRAN)\n\nAssunto: Solicitação de Credenciamento como Instrutor de Trânsito Autônomo\n\nPrezado(a) Diretor(a),\n\nEu, [Nome do Instrutor], portador(a) do RG nº [RG] e CPF nº [CPF], Credencial de Instrutor de Trânsito nº [Credencial], residente e domiciliado(a) na [Endereço Completo], venho respeitosamente, por meio deste, solicitar a Vossa Senhoria o credenciamento para atuar como Instrutor de Trânsito Autônomo na categoria [A/B].\n\nPara fins de instrução deste pedido, anexo as certidões negativas de distribuidor criminal, certidão de regularidade do curso de capacitação de instrutor de trânsito, comprovante de residência e cópia autenticada da CNH com a observação "EAR" (Exerce Atividade Remunerada).\n\nTermos em que peço deferimento.\n\n[Cidade / UF], [Data]\n\n___________________________________\n[Nome do Instrutor]`,
+    
+    'Kit Digital de Agenda': `KIT DIGITAL DE AGENDA - CONTROLE DE HORÁRIOS DE ALUNOS\n\nSegunda a Sexta-Feira:\n07:00 - 07:50 | Aluno(a): ___________________ | Aula nº: __ / 20\n08:00 - 08:50 | Aluno(a): ___________________ | Aula nº: __ / 20\n09:00 - 09:50 | Aluno(a): ___________________ | Aula nº: __ / 20\n10:00 - 10:50 | Aluno(a): ___________________ | Aula nº: __ / 20\n11:00 - 11:50 | Aluno(a): ___________________ | Aula nº: __ / 20\n\n[Intervalo de Almoço]\n\n14:00 - 14:50 | Aluno(a): ___________________ | Aula nº: __ / 20\n15:00 - 15:50 | Aluno(a): ___________________ | Aula nº: __ / 20\n16:00 - 16:50 | Aluno(a): ___________________ | Aula nº: __ / 20\n17:00 - 17:50 | Aluno(a): ___________________ | Aula nº: __ / 20\n18:00 - 18:50 | Aluno(a): ___________________ | Aula nº: __ / 20`,
+    
+    'Modelo de Recibos Profissional': `RECIBO DE PAGAMENTO - INSTRUTOR DE TRÂNSITO AUTÔNOMO\n\nValor: R$ _________ (____________________________________________)\n\nRecebi de [Nome do Aluno], inscrito(a) no CPF nº ___________________, a importância supra de R$ _________ referente ao pacote de _______ aulas práticas de direção veicular na Categoria [A / B], ministradas pelo Instrutor Autônomo credenciado [Nome do Instrutor].\n\nPor ser verdade, firmo o presente para que surta seus efeitos.\n\n[Cidade / UF], [Data]\n\n___________________________________\n[Nome do Instrutor]\nCPF/CNPJ: ___________________`,
+    
+    'Reforma de Instagram (Guia)': `GUIA DE REFORMA DE INSTAGRAM PARA INSTRUTORES AUTÔNOMOS\n\n1. FOTO DO PERFIL\n- Use uma foto de busto para cima, sorrindo e com boa iluminação.\n- Se possível, use o carro de fundo ou camisa polo limpa com seu logo.\n\n2. NOME DO PERFIL (SEO)\n- Mude para: "Instrutor [Seu Nome] - [Sua Cidade]" (Ex: "Instrutor Carlos - Macapá").\n- Evite nomes artísticos difíceis. Alunos buscam por "Instrutor [Cidade]".\n\n3. BIO PERSUASIVA (A Fórmula de 3 Linhas)\n- Linha 1 (Autoridade/Promessa): "Te ajudo a passar de primeira no exame do Detran sem ansiedade."\n- Linha 2 (Diferencial): "Aulas práticas personalizadas e humanizadas para habilitados."\n- Linha 3 (Chamada para Ação): "Clique no link abaixo para agendar sua aula experimental 👇"\n\n4. LINK DA BIO (CTA)\n- Crie um link direto para seu WhatsApp (use o wa.me) com uma mensagem pré-definida.`,
+    
+    'Roteiros de Vídeos IA': `ROTEIROS DE VÍDEOS PERSUASIVOS (REELS / TIKTOK)\n\nRoteiro 1: "O Medo de Dirigir"\n- Gancho (0-3s): "Você comprou o carro, mas ele vive na garagem pegando poeira por medo do trânsito?"\n- Conteúdo (3-15s): "Esse medo é muito comum e acontece porque na autoescola te ensinaram a passar na prova, não a andar no trânsito real. O segredo é começar em ruas calmas de bairro, dominando primeiro o controle de embreagem e o posicionamento."\n- CTA (15-30s): "Quer perder o medo de uma vez por todas? Digite 'QUERO' nos comentários que eu te envio uma mensagem para começarmos."`,
+    
+    'Arte para Carro (Adesivos)': `ESPECIFICAÇÕES DE ADESIVAÇÃO DE VEÍCULO - INSTRUTOR AUTÔNOMO\n\n1. ADESIVO LATERAL\n- Texto: "TREINAMENTO PARA HABILITADOS" (Fonte: Montserrat ExtraBold)\n- Subtexto: "Aulas Humanizadas e Perca o Medo de Dirigir"\n- WhatsApp: (XX) 9XXXX-XXXX\n- Tamanho recomendado: 60cm de largura por 30cm de altura.\n\n2. ADESIVO TRASEIRO (Vidro Traseiro)\n- Texto: "Pacientes e credenciados. Perca o medo de dirigir!"\n- Telefone em destaque.\n- Material: Vinil Microperfurado (garante visibilidade de dentro para fora).`,
+    
+    'Scripts de Fechamento WhatsApp': `SCRIPT DE MATRÍCULA NO WHATSAPP - DO OLÁ AO FECHAMENTO\n\nAluno: "Olá, gostaria de saber os valores das aulas."\n\nInstrutor: "Olá! Tudo bem? Sou o Instrutor [Seu Nome]. Com certeza vou te passar os detalhes! Mas antes, para eu te passar a melhor proposta, você já tem a CNH ou está tirando o processo de primeira habilitação?"\n\nAluno: "Já tenho CNH, mas morro de medo de pegar a rodovia."\n\nInstrutor: "Entendi perfeitamente! Esse bloqueio é muito comum e é exatamente nisso que sou especialista. Nosso treinamento é focado no seu carro, no seu bairro, com total paciência, até você se sentir seguro(a). Para esse caso, recomendo o nosso Pacote de Controle e Autonomia. Qual o melhor dia para fazermos uma avaliação prática?"`,
+    
+    'Quebrando Objeções de Preço': `GUIA DE CONTORNO DE OBJEÇÕES DE VENDAS\n\nObjeção: "Achei o seu preço alto. A autoescola cobra mais barato."\n\nResposta Estratégica:\n"Eu entendo perfeitamente que o preço seja um fator importante! A diferença é que a autoescola te prepara para a pista fechada do Detran em grupo. O meu serviço é uma mentoria de trânsito real individualizada, no seu próprio veículo se preferir, focada na sua autonomia total para dirigir no trânsito pesado. É o investimento na sua liberdade e segurança de uma vez por todas. Vamos agendar uma aula experimental para você ver a diferença na prática?"`
+  };
+  
+  const content = fileContents[fileName] || `Conteúdo do arquivo "${fileName}" do portal de aceleração.`;
+  const sanitizedName = fileName.replace(/\s+/g, '_').replace(/[^\w]/gi, '') + '.txt';
+  
   setTimeout(() => {
-    showToast(`Arquivo "${fileName}" baixado com sucesso!`);
-  }, 1200);
+    try {
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = sanitizedName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast(`Arquivo "${fileName}" baixado com sucesso!`);
+    } catch (err) {
+      console.error('Erro ao baixar arquivo:', err);
+      showToast('Erro ao processar download.', 'error');
+    }
+  }, 1000);
 }
 
 // 8. CRM DE LEADS (ALUNOS DO INSTRUTOR)
